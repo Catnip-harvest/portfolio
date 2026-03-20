@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import Home from './components/Home';
 import ProjectDetailWrapper from './components/ProjectDetailWrapper';
-import AccomplishmentsPage from './components/AccomplishmentsPage';
-import { Layers, Menu, X, Sun, Moon, Trophy } from 'lucide-react';
+import { Layers, Menu, X, Sun, Moon } from 'lucide-react';
 
 const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -24,11 +23,6 @@ const App: React.FC = () => {
     setDarkMode(!darkMode);
   };
 
-  const handleBackToHome = () => {
-    navigate('/');
-    setMobileMenuOpen(false);
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-dark text-slate-900 dark:text-slate-200 font-sans selection:bg-primary/30 transition-colors duration-300">
       
@@ -44,7 +38,6 @@ const App: React.FC = () => {
           <div className="hidden md:flex items-center gap-8">
             <ul className="flex gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
               <li><Link to="/" className="hover:text-primary dark:hover:text-primary transition-colors">Home</Link></li>
-              <li><Link to="/accomplishments" className="hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-1"><Trophy size={14}/> Accomplishments</Link></li>
             </ul>
 
             <div className="flex items-center gap-4 border-l border-slate-200 dark:border-slate-700 pl-6">
@@ -86,7 +79,6 @@ const App: React.FC = () => {
             >
                 <ul className="flex flex-col p-4 gap-4 text-center text-slate-700 dark:text-slate-300">
                     <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
-                    <li><Link to="/accomplishments" onClick={() => setMobileMenuOpen(false)}>Accomplishments</Link></li>
                     <li><a href="mailto:84.viethoang@gmail.com" className="text-primary font-medium">Contact</a></li>
                 </ul>
             </motion.div>
@@ -98,7 +90,6 @@ const App: React.FC = () => {
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/project/:id" element={<ProjectDetailWrapper />} />
-          <Route path="/accomplishments" element={<AccomplishmentsPage onBack={handleBackToHome} />} />
         </Routes>
       </AnimatePresence>
     </div>

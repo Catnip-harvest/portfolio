@@ -18,6 +18,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
 
   // Collect all media for the gallery
   const galleryMedia = [];
+  if (project.imageUrl) galleryMedia.push(project.imageUrl); // Hero image first in gallery now
   if (project.videoUrl && !project.videoUrl.includes('youtube.com/embed')) galleryMedia.push(project.videoUrl);
   if (project.secondaryImageUrl) galleryMedia.push(project.secondaryImageUrl);
   if (project.additionalMedia) galleryMedia.push(...project.additionalMedia);
@@ -30,9 +31,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 100 }}
-      className="min-h-screen bg-slate-50 dark:bg-dark transition-colors duration-300 z-50 relative"
+      className="min-h-screen bg-white dark:bg-dark transition-colors duration-300 z-50 relative"
     >
-      {/* Lightbox / Zoom Modal */}
+      {/* Lightbox / Zoom Modal (Same as before) */}
       <AnimatePresence>
         {selectedMedia && (
           <motion.div 
@@ -93,63 +94,51 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
         </div>
       </div>
 
-      {/* Hero Header */}
-      <div className="relative h-[60vh] w-full bg-slate-900 border-b border-slate-800 flex items-center justify-center overflow-hidden cursor-pointer group" onClick={() => project.imageUrl && setSelectedMedia(project.imageUrl)}>
-        {project.imageUrl && (
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center p-8 lg:p-16">
-                 {/* Main Hero Image/GIF with proper framing for both dark/light contrast */}
-                <div className="relative w-full h-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-slate-700/50 bg-black/40 group-hover:scale-[1.02] transition-transform duration-500">
-                     <img 
-                        src={project.imageUrl} 
-                        alt={project.title} 
-                        className="w-full h-full object-contain sm:object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500"></div>
-                     <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Search size={14} /> Click to Zoom
-                    </div>
-                </div>
-            </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-full p-8 pointer-events-none">
-            <div className="container mx-auto">
-                <motion.h1 
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg"
-                >
-                    {project.title}
-                </motion.h1>
-                <div className="flex flex-wrap gap-3">
+      {/* Main Content Area */}
+      <div className="container mx-auto px-4 py-12 max-w-6xl">
+        {/* Header Section: Title, Tags & Date */}
+        <div className="mb-12 border-b border-slate-200 dark:border-slate-800 pb-8">
+            <motion.h1 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight"
+            >
+                {project.title}
+            </motion.h1>
+            <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => (
-                        <span key={tag} className="px-3 py-1 bg-primary/30 text-blue-200 border border-primary/40 rounded-full text-sm font-medium flex items-center gap-1 backdrop-blur-sm shadow-sm pointer-events-auto">
+                        <span key={tag} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold flex items-center gap-1.5">
                             <Tag size={12} /> {tag}
                         </span>
                     ))}
                 </div>
+                <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
+                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-medium">
+                    <Calendar size={16} />
+                    <span>{project.date || '2024'}</span>
+                </div>
             </div>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
             {/* Main Info */}
-            <div className="lg:col-span-2 space-y-12">
+            <div className="lg:col-span-2 space-y-16">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Overview</h2>
-                    <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                        Project Overview
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-300 text-xl leading-relaxed font-light">
                         {project.fullDescription}
                     </p>
                 </div>
 
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Key Features</h2>
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">Technical Features</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {project.features.map((feature, idx) => (
-                            <div key={idx} className="flex items-start gap-3 bg-white dark:bg-card p-5 rounded-xl border border-slate-200 dark:border-slate-700/50 shadow-sm hover:border-primary/30 transition-colors">
+                            <div key={idx} className="flex items-start gap-3 bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-sm">
                                 <CheckCircle2 size={24} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
                                 <span className="text-slate-700 dark:text-slate-200 font-medium">{feature}</span>
                             </div>
@@ -157,97 +146,108 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
                     </div>
                 </div>
 
-                {/* Media Gallery */}
-                {project.videoUrl?.includes('youtube.com/embed') && (
-                     <div>
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">YouTube Demo</h2>
-                        <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 bg-black">
-                            <iframe 
-                                src={project.videoUrl} 
-                                title="YouTube video player" 
-                                frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerPolicy="strict-origin-when-cross-origin" 
-                                allowFullScreen
-                                className="w-full h-auto aspect-video"
-                            ></iframe>
+                {/* Media Gallery / Main Display */}
+                <div className="space-y-10">
+                    {project.videoUrl?.includes('youtube.com/embed') && (
+                        <div className="space-y-4">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">Video Demonstration</h2>
+                            <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 bg-black aspect-video">
+                                <iframe 
+                                    src={project.videoUrl} 
+                                    title="YouTube video player" 
+                                    frameBorder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerPolicy="strict-origin-when-cross-origin" 
+                                    allowFullScreen
+                                    className="w-full h-full"
+                                ></iframe>
+                            </div>
                         </div>
-                     </div>
-                )}
+                    )}
 
-                {galleryMedia.length > 0 && (
-                     <div>
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">Project Media Gallery</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            {galleryMedia.map((media, idx) => (
-                                <div 
-                                    key={idx} 
-                                    className="group relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 cursor-pointer"
-                                    onClick={() => setSelectedMedia(media)}
-                                >
-                                    {isVideo(media) ? (
-                                        <div className="w-full h-full aspect-video">
-                                             <video 
-                                                src={media} 
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                             <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
-                                                 <div className="bg-primary text-white rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 shadow-lg">
-                                                     <Search size={20} />
-                                                 </div>
-                                             </div>
-                                        </div>
-                                    ) : (
-                                        <div className="w-full h-full aspect-video">
-                                            <img 
-                                                src={media} 
-                                                alt={`Gallery view ${idx + 1}`} 
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
-                                                 <div className="bg-primary text-white rounded-full px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 shadow-lg flex items-center gap-2 font-medium">
-                                                     <Search size={16} /> Enlarge Image
-                                                 </div>
-                                             </div>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                    {galleryMedia.length > 0 && (
+                        <div className="space-y-6">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">Media & Visuals</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {galleryMedia.map((media, idx) => (
+                                    <motion.div 
+                                        key={idx} 
+                                        whileHover={{ y: -5 }}
+                                        className={`group relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 cursor-pointer ${idx === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-square sm:aspect-video'}`}
+                                        onClick={() => setSelectedMedia(media)}
+                                    >
+                                        {isVideo(media) ? (
+                                            <div className="w-full h-full">
+                                                <video 
+                                                    src={media} 
+                                                    autoPlay
+                                                    muted
+                                                    loop
+                                                    playsInline
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all opacity-0 group-hover:opacity-100">
+                                                    <div className="bg-primary text-white rounded-full p-4 shadow-xl">
+                                                        <Search size={24} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="w-full h-full">
+                                                <img 
+                                                    src={media} 
+                                                    alt={`Project visual ${idx + 1}`} 
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all opacity-0 group-hover:opacity-100">
+                                                    <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-full px-6 py-3 shadow-2xl font-bold flex items-center gap-2">
+                                                        <Search size={20} /> View Full Detail
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
 
-            {/* Sidebar */}
+            {/* Sidebar Details */}
             <div className="space-y-6">
-                <div className="bg-white dark:bg-card p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg top-24 sticky">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">Project Details</h3>
+                <div className="bg-slate-50 dark:bg-slate-800/40 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-700/50 shadow-sm top-24 sticky">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-8 pb-4 border-b border-slate-200 dark:border-slate-700/50">Details</h3>
                     
-                    <div className="space-y-6">
-                        <div className="flex flex-col gap-1">
-                            <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2"><Calendar size={14}/> Date Completed</span>
-                            <span className="text-slate-800 dark:text-white font-medium text-lg">{project.date || '2024'}</span>
+                    <div className="space-y-8">
+                        <div>
+                            <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 block">My Role</span>
+                            <span className="text-slate-900 dark:text-white font-bold text-xl">{project.role || 'Lead Engineer'}</span>
                         </div>
                         
-                         <div className="flex flex-col gap-1">
-                            <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">My Role</span>
-                            <span className="text-slate-800 dark:text-white font-medium text-lg">{project.role || 'Lead Engineer'}</span>
-                        </div>
-                        
-                        {project.collaborators && (
-                            <div className="flex flex-col gap-2">
-                                <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Collaborators</span>
-                                <div className="space-y-1">
+                        {project.collaborators && project.collaborators.length > 0 && (
+                            <div>
+                                <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 block">Collaborators</span>
+                                <div className="flex flex-wrap gap-2">
                                     {project.collaborators.map(c => (
-                                        <div key={c} className="text-slate-800 dark:text-slate-200 font-medium px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded-lg">{c}</div>
+                                        <div key={c} className="text-slate-700 dark:text-slate-300 font-bold px-4 py-2 bg-white dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700/50 text-sm shadow-sm">{c}</div>
                                     ))}
                                 </div>
                             </div>
                         )}
+
+                        <div className="pt-4">
+                            <div className="flex flex-col gap-3">
+                                {project.id === 'capstone' && (
+                                    <a href="https://github.com/Catnip-harvest" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-slate-900 dark:bg-white dark:text-slate-900 text-white p-4 rounded-2xl font-bold hover:scale-[1.02] transition-transform">
+                                        <Github size={20} /> Source Code
+                                    </a>
+                                )}
+                                <a href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-primary/10 text-primary p-4 rounded-2xl font-bold border border-primary/20 hover:bg-primary/20 transition-all">
+                                    Discuss on LinkedIn <ExternalLink size={18} />
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

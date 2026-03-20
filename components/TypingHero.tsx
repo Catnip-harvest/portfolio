@@ -3,11 +3,9 @@ import { motion } from 'framer-motion';
 import { HERO_TITLES } from '../constants';
 import { Github, Linkedin, Mail, ArrowDown, Bot, Trophy } from 'lucide-react';
 
-interface TypingHeroProps {
-  onViewAccomplishments: () => void;
-}
+interface TypingHeroProps {}
 
-const TypingHero: React.FC<TypingHeroProps> = ({ onViewAccomplishments }) => {
+const TypingHero: React.FC<TypingHeroProps> = () => {
   const [text, setText] = useState('');
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -108,12 +106,14 @@ const TypingHero: React.FC<TypingHeroProps> = ({ onViewAccomplishments }) => {
             <a href="#projects" className="px-8 py-4 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/20 w-full sm:w-auto text-center">
               View Projects
             </a>
-            <button 
-                onClick={onViewAccomplishments}
+            <a 
+                href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-white font-medium rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2 w-full sm:w-auto shadow-sm"
             >
               <Trophy size={20} /> See all licenses & certifications
-            </button>
+            </a>
           </motion.div>
           
           <motion.div 
