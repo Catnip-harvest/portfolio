@@ -17,9 +17,7 @@ const Home: React.FC = () => {
     navigate(`/project/${project.id}`, { state: { project } });
   };
 
-  const handleViewAccomplishments = () => {
-    navigate('/accomplishments');
-  };
+
 
   return (
     <motion.main
@@ -29,7 +27,7 @@ const Home: React.FC = () => {
         exit={{ opacity: 0 }}
     >
         {/* Hero Section */}
-        <TypingHero onViewAccomplishments={handleViewAccomplishments} />
+        <TypingHero />
 
         {/* Domain of Expertise Section */}
         <Expertise />
@@ -69,12 +67,14 @@ const Home: React.FC = () => {
                 >
                     <Github size={18} /> See All Projects
                 </a>
-                <button 
-                    onClick={handleViewAccomplishments}
-                    className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-700 dark:text-white font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm w-full sm:w-auto justify-center"
+                <a 
+                    href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-700 dark:text-white font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm w-full sm:w-auto justify-center"
                 >
                     <Trophy size={18} /> View All Accomplishments
-                </button>
+                </a>
             </div>
 
             </div>
