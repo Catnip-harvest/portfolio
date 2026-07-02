@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import TypingHero from './TypingHero';
 import ProjectCard from './ProjectCard';
@@ -9,13 +9,51 @@ import Expertise from './Expertise';
 import Footer from './Footer';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
-import { Trophy, Github } from 'lucide-react';
+import { Trophy, Github, X, ZoomIn } from 'lucide-react';
+
+type ZoomedProjectMedia = {
+  project: Project;
+  media: string[];
+  index: number;
+};
+
+const getProjectMedia = (project: Project) => {
+  const media = [project.imageUrl];
+
+  if (project.videoUrl && !project.videoUrl.includes('youtube.com/embed')) {
+    media.push(project.videoUrl);
+  }
+
+  if (project.secondaryImageUrl) {
+    media.push(project.secondaryImageUrl);
+  }
+
+  if (project.additionalMedia) {
+    media.push(...project.additionalMedia);
+  }
+
+  return media.filter(Boolean);
+};
+
+const isVideo = (url: string) => url.endsWith('.mp4') || url.endsWith('.gif');
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const [zoomedMedia, setZoomedMedia] = useState<ZoomedProjectMedia | null>(null);
 
   const handleProjectClick = (project: Project) => {
     navigate(`/project/${project.id}`, { state: { project } });
+  };
+
+  const handleProjectMediaZoom = (project: Project) => {
+    setZoomedMedia({ project, media: getProjectMedia(project), index: 0 });
+  };
+
+  const setMediaIndex = (index: number) => {
+    setZoomedMedia((current) => {
+      if (!current) return current;
+      return { ...current, index };
+    });
   };
 
 
@@ -56,7 +94,7 @@ const Home: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
                 {PROJECTS.map((project) => (
                 <div key={project.id} className="h-full">
-                    <ProjectCard project={project} onClick={handleProjectClick} />
+                    <ProjectCard project={project} onClick={handleProjectClick} onImageZoom={handleProjectMediaZoom} />
                 </div>
                 ))}
             </div>
@@ -84,6 +122,83 @@ const Home: React.FC = () => {
         <Certifications />
         
         <Footer />
+
+        <AnimatePresence>
+            {zoomedMedia && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[100] bg-black/90 p-4 md:p-8 flex items-center justify-center"
+                    onClick={() => setZoomedMedia(null)}
+                >
+                    <button
+                        type="button"
+                        onClick={() => setZoomedMedia(null)}
+                        className="absolute right-4 top-4 md:right-6 md:top-6 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
+                        aria-label="Close image preview"
+                    >
+                        <X size={22} />
+                    </button>
+                    <motion.div
+                        initial={{ scale: 0.98 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0.98 }}
+                        className="w-full max-w-6xl"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="mb-3 flex items-center justify-between gap-3 text-white">
+                            <div>
+                                <p className="text-sm text-white/60">Featured work media</p>
+                                <h3 className="text-xl font-semibold">{zoomedMedia.project.title}</h3>
+                            </div>
+                            <div className="hidden sm:flex items-center gap-2 text-sm text-white/70">
+                                <ZoomIn size={16} /> Opened large
+                            </div>
+                        </div>
+                        <div className="max-h-[72vh] overflow-auto rounded-lg bg-black border border-white/10">
+                            {isVideo(zoomedMedia.media[zoomedMedia.index]) ? (
+                                <video
+                                    src={zoomedMedia.media[zoomedMedia.index]}
+                                    controls
+                                    autoPlay
+                                    loop
+                                    muted
+                                    className="mx-auto max-h-[72vh] max-w-full object-contain"
+                                />
+                            ) : (
+                                <img
+                                    src={zoomedMedia.media[zoomedMedia.index]}
+                                    alt={zoomedMedia.project.title}
+                                    className="mx-auto h-auto max-h-none w-auto max-w-none object-contain"
+                                />
+                            )}
+                        </div>
+                        {zoomedMedia.media.length > 1 && (
+                            <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
+                                {zoomedMedia.media.map((media, index) => (
+                                    <button
+                                        type="button"
+                                        key={media}
+                                        onClick={() => setMediaIndex(index)}
+                                        className={`h-16 w-24 shrink-0 overflow-hidden rounded-lg border bg-black ${
+                                            index === zoomedMedia.index ? 'border-primary' : 'border-white/20'
+                                        }`}
+                                        aria-label={`View media ${index + 1}`}
+                                    >
+                                        {isVideo(media) ? (
+                                            <video src={media} muted className="h-full w-full object-cover" />
+                                        ) : (
+                                            <img src={media} alt="" className="h-full w-full object-cover" />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     </motion.main>
   );
 };

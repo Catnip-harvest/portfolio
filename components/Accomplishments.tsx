@@ -37,7 +37,7 @@ const Accomplishments: React.FC = () => {
 
               <div className="p-6 md:p-8 flex flex-col justify-center">
                 <div className="flex flex-wrap items-center gap-3 mb-5">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-sm font-semibold">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-sm font-semibold">
                     <Medal size={15} /> {item.category}
                   </span>
                   <span className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium">

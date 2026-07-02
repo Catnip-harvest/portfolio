@@ -6,9 +6,6 @@ import { Award, ExternalLink } from 'lucide-react';
 const Certifications: React.FC = () => {
   return (
     <section id="certifications" className="py-24 bg-slate-50 dark:bg-dark relative overflow-hidden transition-colors duration-300">
-       {/* Decorative subtle grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +25,7 @@ const Certifications: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07 }}
-              className="group bg-white dark:bg-card border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 flex flex-col md:flex-row items-center gap-6 hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/10"
+              className="group bg-white dark:bg-card border border-slate-200 dark:border-slate-700/50 rounded-lg p-6 flex flex-col md:flex-row items-center gap-6 hover:border-primary/50 transition-colors shadow-sm"
             >
               <div className="w-20 h-20 shrink-0 bg-slate-50 dark:bg-white rounded-lg p-2 flex items-center justify-center border border-slate-100 dark:border-none">
                  <img src={cert.badgeUrl} alt="Badge" className="w-full h-full object-contain" />
@@ -68,7 +65,7 @@ const Certifications: React.FC = () => {
                 href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/details/certifications/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-700 dark:text-white font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-white font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm"
             >
                 <Award size={18} /> See All Certifications
             </a>
