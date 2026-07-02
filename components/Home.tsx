@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import TypingHero from './TypingHero';
 import ProjectCard from './ProjectCard';
 import Certifications from './Certifications';
+import Accomplishments from './Accomplishments';
 import Expertise from './Expertise';
 import Footer from './Footer';
 import { PROJECTS } from '../constants';
@@ -31,6 +32,8 @@ const Home: React.FC = () => {
 
         {/* Domain of Expertise Section */}
         <Expertise />
+
+        <Accomplishments />
 
         {/* Projects Section */}
         <section id="projects" className="py-24 bg-slate-100 dark:bg-card/30 transition-colors duration-300">
@@ -68,9 +71,7 @@ const Home: React.FC = () => {
                     <Github size={18} /> See All Projects
                 </a>
                 <a 
-                    href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#accomplishments"
                     className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-700 dark:text-white font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm w-full sm:w-auto justify-center"
                 >
                     <Trophy size={18} /> View All Accomplishments

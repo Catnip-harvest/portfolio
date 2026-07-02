@@ -31,8 +31,11 @@ export interface Accomplishment {
   organization: string;
   date: string;
   description: string;
-  category: 'Award' | 'Hackathon' | 'Scholarship' | 'Speaking';
+  category: 'Award' | 'Competition' | 'Hackathon' | 'Scholarship' | 'Speaking';
   icon?: string;
+  imageUrl?: string;
+  gallery?: string[];
+  linkUrl?: string;
 }
 
 export type SectionId = 'home' | 'projects' | 'media' | 'certifications' | 'contact';

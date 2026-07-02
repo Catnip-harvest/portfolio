@@ -3,6 +3,7 @@ import { Project, Certification, Accomplishment } from './types';
 export const HERO_TITLES = [
   "Robot Engineer",
   "AI Engineer",
+  "iNext Leader Finalist",
   "Blockchain & AI Researcher",
   "Mechatronics Specialist",
   "Automation Expert"
@@ -88,8 +89,8 @@ export const CERTIFICATIONS: Certification[] = [
     title: 'IELTS 7.5 (Overall)',
     issuer: 'British Council',
     date: 'Sep 2025',
-    badgeUrl: 'https://cdn.simpleicons.org/britishcouncil',
-    verifyUrl: undefined
+    badgeUrl: '/british-council.svg',
+    verifyUrl: 'https://drive.google.com/file/d/1XMzPeHns2E2jnxcN4J_udBvTOIp17ZgZ/view?usp=sharing'
   },
   {
     id: 'c2',
@@ -128,7 +129,7 @@ export const CERTIFICATIONS: Certification[] = [
     title: 'Harnessing the Power of Data with Power BI',
     issuer: 'Microsoft',
     date: '2025',
-    badgeUrl: 'https://cdn.simpleicons.org/microsoft',
+    badgeUrl: '/microsoft.svg',
     // Microsoft official logo
     verifyUrl: 'https://www.coursera.org/account/accomplishments/records/KSGEAJSUN7FG'
   },
@@ -167,6 +168,16 @@ export const CERTIFICATIONS: Certification[] = [
 ];
 
 export const ACCOMPLISHMENTS: Accomplishment[] = [
+  {
+    id: 'a2',
+    title: 'Top 12 Finalist - iNext Leader',
+    organization: 'iConneX',
+    date: 'June 2026',
+    description: 'Attended iNext Leader by iConneX and became a Top 12 finalist from 1,500 contestants. Honored as the Outstanding Smart Engineering Team Track finalist for the competition finale.',
+    category: 'Competition',
+    imageUrl: '/inext-leader-top-12-smart-engineering.webp',
+    gallery: ['/inext-leader-finalists.webp', '/inext-leader-presentation.webp']
+  },
   {
     id: 'a1',
     title: 'Third Prize (Giải C) - UEH Young Researcher Award',
