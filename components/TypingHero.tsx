@@ -46,14 +46,7 @@ const TypingHero: React.FC<TypingHeroProps> = () => {
   }, [tick, delta]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-slate-50 dark:bg-dark overflow-hidden pt-20 pb-10 transition-colors duration-300">
-      
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px]"></div>
-      </div>
-
+    <section id="home" className="relative min-h-screen flex items-center justify-center bg-white dark:bg-dark overflow-hidden pt-20 pb-10 transition-colors duration-300">
       <div className="container mx-auto px-6 z-10 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
         
         {/* Text Content */}
@@ -63,14 +56,14 @@ const TypingHero: React.FC<TypingHeroProps> = () => {
           transition={{ duration: 0.8 }}
           className="max-w-2xl lg:text-left text-center flex-1"
         >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-200/50 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-blue-600 dark:text-cyan-400 text-sm font-medium mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium mb-8">
               <Bot size={16} /> 
               <span>Robotics & AI Engineering</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-6 transition-colors duration-300">
               Hi, I'm <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-cyan-400 dark:to-blue-600">
+              <span className="text-primary">
                 Hoang Quoc Viet
               </span>
             </h1>
@@ -132,7 +125,7 @@ const TypingHero: React.FC<TypingHeroProps> = () => {
                  href={href} 
                  target={href.startsWith('http') ? "_blank" : undefined}
                  rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-                 className="p-3 bg-white dark:bg-slate-800/50 rounded-full text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white hover:bg-slate-100 dark:hover:bg-primary/20 hover:scale-110 transition-all border border-slate-200 dark:border-slate-700/50 shadow-sm"
+                 className="p-3 bg-white dark:bg-slate-800/50 rounded-lg text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/50 shadow-sm"
                >
                  <Icon size={24} />
                </a>
@@ -147,48 +140,39 @@ const TypingHero: React.FC<TypingHeroProps> = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl flex-1 hidden md:block"
         >
-          {/* Creative Background Shape */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 dark:from-cyan-400/20 dark:to-blue-600/20 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] blur-xl transition-all duration-1000 hover:rounded-[60%_40%_30%_70%/60%_30%_70%_40%]"></div>
-          <div className="absolute inset-0 bg-gradient-to-bl from-primary/20 to-transparent rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-xl transition-all duration-1000 hover:rounded-[40%_60%_70%_30%/40%_50%_60%_50%]"></div>
-          
           {/* Profile Image */}
-          <div className="relative z-10 w-full aspect-square flex items-end justify-center">
-             {/* Replace this src with the actual uploaded image path */}
+          <div className="relative z-10 w-full aspect-square flex items-end justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 overflow-hidden">
              <img 
                src="/profile-picture.png" 
                alt="Hoang Quoc Viet" 
-               className="w-[85%] h-auto object-contain drop-shadow-2xl"
+               className="w-[85%] h-auto object-contain"
              />
           </div>
           
           {/* Floating Badges */}
-          <motion.div 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            className="absolute top-1/4 -left-4 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 flex items-center gap-3 z-20"
+          <div
+            className="absolute top-1/4 -left-4 bg-white dark:bg-slate-800 p-3 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 flex items-center gap-3 z-20"
           >
-            <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-primary">
               <Bot size={20} />
             </div>
             <div>
               <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Focus</p>
               <p className="text-sm font-bold text-slate-800 dark:text-white">Robotics</p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute bottom-1/4 -right-4 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 flex items-center gap-3 z-20"
+          <div
+            className="absolute bottom-1/4 -right-4 bg-white dark:bg-slate-800 p-3 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 flex items-center gap-3 z-20"
           >
-            <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-purple-600 dark:text-purple-400">
+            <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-primary">
               <Trophy size={20} />
             </div>
             <div>
               <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Experience</p>
               <p className="text-sm font-bold text-slate-800 dark:text-white">2+ Years</p>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
 
       </div>
