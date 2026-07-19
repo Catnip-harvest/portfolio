@@ -31,3 +31,6 @@ public/*.mp4
 lighthouse-*.json
 .lighthouse-temp/
 .lh-final-temp/
+
+.vercel
+.env*
