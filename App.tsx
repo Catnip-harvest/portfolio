@@ -1,91 +1,110 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import Home from './components/Home';
 import ProjectDetailWrapper from './components/ProjectDetailWrapper';
-import { Layers, Menu, X, Sun, Moon } from 'lucide-react';
+
+const getInitialTheme = () => {
+  const savedTheme = window.localStorage.getItem('portfolio-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
 
 const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
-  const navigate = useNavigate();
+  const [theme, setTheme] = useState<'light' | 'dark'>(getInitialTheme);
   const location = useLocation();
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
 
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-  };
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const homePrefix = location.pathname === '/' ? '' : '/';
+  const navigation = [
+    { label: 'Now', href: `${homePrefix}#now` },
+    { label: 'Work', href: `${homePrefix}#work` },
+    { label: 'Recognition', href: `${homePrefix}#recognition` },
+    { label: 'About', href: `${homePrefix}#about` },
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-dark text-slate-900 dark:text-slate-200 font-sans selection:bg-primary/30 transition-colors duration-300">
-      
-      {/* Navigation (Sticky) */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <Layers className="text-primary" />
-            <span>vizhoang</span>
+    <div className="site-shell">
+      <header className="site-header">
+        <div className="site-header__inner">
+          <Link className="wordmark" to="/" aria-label="Hoang Quoc Viet, home">
+            <span className="wordmark__name">Hoang Quoc Viet</span>
+            <span className="wordmark__role">Robotics + AI</span>
           </Link>
-          
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <ul className="flex gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
-              <li><Link to="/" className="hover:text-primary dark:hover:text-primary transition-colors">Home</Link></li>
-            </ul>
 
-            <div className="flex items-center gap-4 border-l border-slate-200 dark:border-slate-700 pl-6">
-                 {/* Theme Toggle */}
-                <button 
-                    onClick={toggleTheme} 
-                    className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
-                    aria-label="Toggle Theme"
-                >
-                    {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                </button>
-
-                <a href="mailto:84.viethoang@gmail.com" className="px-5 py-2 text-sm bg-primary text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/20">
-                    Contact
-                </a>
-            </div>
-          </div>
-
-          {/* Mobile Menu Controls */}
-          <div className="flex items-center gap-4 md:hidden">
-            <button 
-                onClick={toggleTheme} 
-                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+          <nav className="desktop-nav" aria-label="Primary navigation">
+            {navigation.map((item) => (
+              <a key={item.label} href={item.href}>
+                {item.label}
+              </a>
+            ))}
+            <a className="button button--small button--primary" href="mailto:84.viethoang@gmail.com">
+              Contact
+            </a>
+            <button
+              type="button"
+              className="icon-button"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
             >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <button className="text-slate-900 dark:text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                {mobileMenuOpen ? <X /> : <Menu />}
+          </nav>
+
+          <div className="mobile-nav-controls">
+            <button
+              type="button"
+              className="icon-button"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              type="button"
+              className="icon-button"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-        
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-            <motion.div 
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                className="md:hidden bg-white dark:bg-dark border-b border-slate-200 dark:border-slate-800 overflow-hidden"
-            >
-                <ul className="flex flex-col p-4 gap-4 text-center text-slate-700 dark:text-slate-300">
-                    <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
-                    <li><a href="mailto:84.viethoang@gmail.com" className="text-primary font-medium">Contact</a></li>
-                </ul>
-            </motion.div>
-        )}
-      </nav>
 
-      {/* Main Content Area */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.nav
+              className="mobile-nav"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              aria-label="Mobile navigation"
+            >
+              {navigation.map((item) => (
+                <a key={item.label} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                  {item.label}
+                </a>
+              ))}
+              <a href="mailto:84.viethoang@gmail.com" onClick={() => setMobileMenuOpen(false)}>
+                Contact
+              </a>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </header>
+
       <AnimatePresence mode="wait">
         <Routes location={location}>
           <Route path="/" element={<Home />} />
