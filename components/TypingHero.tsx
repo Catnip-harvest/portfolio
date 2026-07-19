@@ -1,190 +1,49 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { HERO_TITLES } from '../constants';
-import { Github, Linkedin, Mail, ArrowDown, Bot, Trophy } from 'lucide-react';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowDownRight, Mail } from 'lucide-react';
 
-interface TypingHeroProps {}
-
-const TypingHero: React.FC<TypingHeroProps> = () => {
-  const [text, setText] = useState('');
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [delta, setDelta] = useState(150);
-
-  const tick = useCallback(() => {
-    let i = loopNum % HERO_TITLES.length;
-    let fullText = HERO_TITLES[i];
-    let updatedText = isDeleting 
-      ? fullText.substring(0, text.length - 1) 
-      : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (isDeleting) {
-      setDelta(60); 
-    } else {
-      setDelta(150);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(2000); 
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(500); 
-    }
-  }, [loopNum, isDeleting, text]);
-
-  useEffect(() => {
-    // Use window.setTimeout to avoid Node.js/Browser type conflict
-    const ticker = window.setTimeout(() => {
-      tick();
-    }, delta);
-
-    return () => window.clearTimeout(ticker);
-  }, [tick, delta]);
+const TypingHero: React.FC = () => {
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-white dark:bg-dark overflow-hidden pt-20 pb-10 transition-colors duration-300">
-      <div className="container mx-auto px-6 z-10 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
-        
-        {/* Text Content */}
+    <section id="home" className="hero">
+      <div className="hero__inner">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
+          className="hero__copy"
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="hero__eyebrow">Robotics software engineer and AI systems builder</p>
+          <h1>I build robots that learn and act.</h1>
+          <p className="hero__summary">
+            Hoang Quoc Viet builds embodied AI, robot-learning systems and automation for real operations.
+          </p>
+          <div className="hero__actions">
+            <a className="button button--primary" href="#work">
+              View work <ArrowDownRight size={18} />
+            </a>
+            <a className="button button--secondary" href="mailto:84.viethoang@gmail.com">
+              Contact <Mail size={18} />
+            </a>
+          </div>
+        </motion.div>
+
+        <motion.figure
+          className="hero__portrait"
+          initial={reduceMotion ? false : { opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-2xl lg:text-left text-center flex-1"
+          transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium mb-8">
-              <Bot size={16} /> 
-              <span>Robotics & AI Engineering</span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-6 transition-colors duration-300">
-              Hi, I'm <br />
-              <span className="text-primary">
-                Hoang Quoc Viet
-              </span>
-            </h1>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="h-12 mb-8 flex items-center lg:justify-start justify-center"
-          >
-             <span className="text-xl md:text-3xl text-slate-600 dark:text-slate-300 font-mono transition-colors duration-300 flex items-center">
-               <span className="text-primary font-semibold">{text}</span>
-               <span className="inline-block w-[3px] h-[1em] bg-slate-500/50 dark:bg-slate-400/50 animate-cursor-blink ml-1"></span>
-             </span>
-          </motion.div>
-
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 transition-colors duration-300"
-          >
-            Specializing in the intersection of AI, Blockchain security, and Robotics. 
-            Passionate about designing intelligent, secure systems and leveraging advanced data analytics to build next-generation automated solutions.
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4"
-          >
-            <a href="#projects" className="px-8 py-4 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/20 w-full sm:w-auto text-center">
-              View Projects
-            </a>
-            <a 
-                href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-white font-medium rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2 w-full sm:w-auto shadow-sm"
-            >
-              <Trophy size={20} /> See all licenses & certifications
-            </a>
-          </motion.div>
-          
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ delay: 0.9 }}
-             className="flex lg:justify-start justify-center gap-6 mt-12"
-          >
-             {[
-               { Icon: Github, href: 'https://github.com/Catnip-harvest' },
-               { Icon: Linkedin, href: 'https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/' },
-               { Icon: Mail, href: 'mailto:84.viethoang@gmail.com' }
-             ].map(({ Icon, href }, idx) => (
-               <a 
-                 key={idx} 
-                 href={href} 
-                 target={href.startsWith('http') ? "_blank" : undefined}
-                 rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-                 className="p-3 bg-white dark:bg-slate-800/50 rounded-lg text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700/50 shadow-sm"
-               >
-                 <Icon size={24} />
-               </a>
-             ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Image Content */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, x: 50 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl flex-1 hidden md:block"
-        >
-          {/* Profile Image */}
-          <div className="relative z-10 w-full aspect-square flex items-end justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 overflow-hidden">
-             <img 
-               src="/profile-picture.png" 
-               alt="Hoang Quoc Viet" 
-               className="w-[85%] h-auto object-contain"
-             />
+          <div className="hero__portrait-frame">
+            <img src="/profile-picture-optimized.webp" alt="Hoang Quoc Viet" />
           </div>
-          
-          {/* Floating Badges */}
-          <div
-            className="absolute top-1/4 -left-4 bg-white dark:bg-slate-800 p-3 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 flex items-center gap-3 z-20"
-          >
-            <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-primary">
-              <Bot size={20} />
-            </div>
-            <div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Focus</p>
-              <p className="text-sm font-bold text-slate-800 dark:text-white">Robotics</p>
-            </div>
-          </div>
-
-          <div
-            className="absolute bottom-1/4 -right-4 bg-white dark:bg-slate-800 p-3 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 flex items-center gap-3 z-20"
-          >
-            <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-primary">
-              <Trophy size={20} />
-            </div>
-            <div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Experience</p>
-              <p className="text-sm font-bold text-slate-800 dark:text-white">2+ Years</p>
-            </div>
-          </div>
-        </motion.div>
-
+          <figcaption>
+            <span>Hoang Quoc Viet</span>
+            <span>Available for full-time robotics roles</span>
+          </figcaption>
+        </motion.figure>
       </div>
-      
-      {/* Scroll indicator */}
-      <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-400 dark:text-slate-500"
-      >
-        <ArrowDown size={24} />
-      </motion.div>
     </section>
   );
 };

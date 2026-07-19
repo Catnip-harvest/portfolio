@@ -1,48 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import ProjectDetail from './ProjectDetail';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
+import ProjectDetail from './ProjectDetail';
 
 const ProjectDetailWrapper: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
-  
   const [project, setProject] = useState<Project | null>((location.state?.project as Project) || null);
   const [loading, setLoading] = useState(!location.state?.project);
 
   useEffect(() => {
     if (project) return;
-
-    // Look up from static PROJECTS list only
-    const staticProject = PROJECTS.find(p => p.id === id);
-    if (staticProject) {
-      setProject(staticProject);
-    }
+    setProject(PROJECTS.find((candidate) => candidate.id === id) || null);
     setLoading(false);
   }, [id, project]);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-dark text-slate-900 dark:text-white">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-      </div>
+      <main className="route-state" aria-label="Loading project">
+        <div className="route-state__skeleton">
+          <span />
+          <span />
+          <span />
+        </div>
+      </main>
     );
   }
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-dark text-slate-900 dark:text-white">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Project Not Found</h2>
-          <button onClick={() => navigate('/')} className="text-primary hover:underline">Return Home</button>
+      <main className="route-state">
+        <div>
+          <h1>Project not found.</h1>
+          <p>The project may have moved or the link is incomplete.</p>
+          <button type="button" className="button button--primary" onClick={() => navigate('/')}>
+            Return home
+          </button>
         </div>
-      </div>
+      </main>
     );
   }
 
-  return <ProjectDetail project={project} onBack={() => navigate('/')} />;
+  return <ProjectDetail project={project} onBack={() => navigate('/#work')} />;
 };
 
 export default ProjectDetailWrapper;

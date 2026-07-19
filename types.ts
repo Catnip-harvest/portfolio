@@ -4,8 +4,10 @@ export interface Project {
   title: string;
   shortDescription: string;
   fullDescription: string;
+  impact?: string;
   tags: string[];
   imageUrl: string;
+  imageFit?: 'cover' | 'contain';
   videoUrl?: string;
   secondaryImageUrl?: string;
   additionalMedia?: string[];
@@ -14,6 +16,9 @@ export interface Project {
   role?: string;
   collaborators?: string[];
   credentialUrl?: string;
+  repoUrl?: string;
+  demoUrl?: string;
+  featured?: boolean;
 }
 
 export interface Certification {
