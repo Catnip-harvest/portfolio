@@ -25,6 +25,7 @@ build
 *.sw?
 
 public/*.mp4
+!public/*-preview.mp4
 # public/*.gif (keep needed GIFs like robot arm)
 
 # Local audit output

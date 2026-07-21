@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ZoomIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Project } from '../types';
+import AutoplayVideo from './AutoplayVideo';
 
 interface ProjectCardProps {
   project: Project;
@@ -40,12 +41,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, variant = 'standard'
         onClick={() => onImageZoom?.(project)}
         aria-label={`Open ${project.title} media`}
       >
-        <img
-          src={project.imageUrl}
-          alt={project.title}
-          className={project.imageFit === 'contain' ? 'is-contain' : ''}
-          loading={variant === 'lead' ? 'eager' : 'lazy'}
-        />
+        {project.previewVideoUrl ? (
+          <AutoplayVideo src={project.previewVideoUrl} poster={project.posterUrl || project.imageUrl} />
+        ) : (
+          <img
+            src={project.imageUrl}
+            alt={project.title}
+            className={project.imageFit === 'contain' ? 'is-contain' : ''}
+            loading={variant === 'lead' ? 'eager' : 'lazy'}
+          />
+        )}
         <span className="project-card__zoom" title="Open media">
           <ZoomIn size={18} />
         </span>

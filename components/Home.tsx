@@ -2,46 +2,35 @@ import React, { useCallback, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Github } from 'lucide-react';
 import { PROJECTS } from '../constants';
+import { getProjectMedia } from '../lib/media';
 import { Project } from '../types';
 import Accomplishments from './Accomplishments';
 import Certifications from './Certifications';
-import Expertise from './Expertise';
 import Footer from './Footer';
 import MediaLightbox, { MediaLightboxState } from './MediaLightbox';
 import ProjectCard from './ProjectCard';
 import TypingHero from './TypingHero';
 
-const CURRENT_WORK = [
+const FIELD_NOTES = [
   {
-    date: 'Jul 2026',
-    title: 'Mira, a voice-controlled robot agent',
+    label: 'Human to robot',
+    title: 'Making physical agents easier to command',
     description:
-      'An SO101 arm that uses LLM tool-calling to execute motion, position its camera, and inspect scenes with a vision model.',
-    result: 'Top 5, Agentic AI Build Week',
+      'Mira explores the interface between ordinary language and explicit, inspectable robot tools.',
   },
   {
-    date: 'Apr - Jul 2026',
-    title: 'AI operations at LOGIVAN',
+    label: 'Simulation to hardware',
+    title: 'Finding failure before deployment',
     description:
-      'n8n workflows, Zalo integrations, OCR pipelines, schema-valid JSON, and dashboards for logistics operations.',
-    result: 'AI Automation and Software Engineering Intern',
+      'Digital twins let me test navigation, manipulation, and sensor assumptions before the physical system pays the price.',
   },
   {
-    date: 'Feb 2026 - Present',
-    title: 'Teaching two robot arms from demonstration',
+    label: 'Operations to software',
+    title: 'Automating the awkward middle of logistics',
     description:
-      'A ROS 2 leader-follower system, 250 physical episodes, ACT training, and repeated rollout diagnostics.',
-    result: 'OpenLab robotics research',
+      'I look for repetitive hand-offs, missing structure, and delayed information, then build the smallest useful automation around them.',
   },
 ];
-
-const getProjectMedia = (project: Project) => {
-  const media = [project.imageUrl];
-  if (project.videoUrl && !project.videoUrl.includes('youtube.com/embed')) media.push(project.videoUrl);
-  if (project.secondaryImageUrl) media.push(project.secondaryImageUrl);
-  if (project.additionalMedia) media.push(...project.additionalMedia);
-  return Array.from(new Set(media.filter(Boolean)));
-};
 
 const Home: React.FC = () => {
   const reduceMotion = useReducedMotion();
@@ -71,40 +60,11 @@ const Home: React.FC = () => {
     >
       <TypingHero />
 
-      <section id="now" className="section section--now">
-        <div className="section__inner now-layout">
-          <div className="section-heading section-heading--narrow">
-            <h2>What I am building now.</h2>
-            <p>Current work across embodied agents, robot learning, and AI automation in logistics.</p>
-          </div>
-          <div className="now-list">
-            {CURRENT_WORK.map((item, index) => (
-              <motion.article
-                key={item.title}
-                initial={reduceMotion ? false : { opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
-              >
-                <time>{item.date}</time>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <span>{item.result}</span>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Expertise />
-
       <section id="work" className="section section--work">
         <div className="section__inner">
           <div className="section-heading section-heading--narrow">
-            <h2>Selected engineering work.</h2>
-            <p>Systems I designed, trained, assembled, debugged, and evaluated beyond the demo.</p>
+            <h2>Built, tested, and shown working.</h2>
+            <p>Robots and intelligent systems I designed, assembled, debugged, and evaluated beyond the slide deck.</p>
           </div>
 
           <div className="featured-work">
@@ -132,6 +92,32 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      <section id="now" className="section section--now">
+        <div className="section__inner now-layout">
+          <div className="section-heading section-heading--narrow">
+            <h2>Working notes.</h2>
+            <p>Three ideas that keep showing up in the systems I build.</p>
+          </div>
+          <div className="now-list">
+            {FIELD_NOTES.map((item, index) => (
+              <motion.article
+                key={item.title}
+                initial={reduceMotion ? false : { opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+              >
+                <span className="now-list__label">{item.label}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Accomplishments onMediaOpen={openMedia} />
 
       <section id="about" className="section section--about">
@@ -148,24 +134,20 @@ const Home: React.FC = () => {
 
           <dl className="about-facts">
             <div>
-              <dt>OpenLab, UEH</dt>
-              <dd>Robotics and AI Researcher</dd>
-              <dd className="about-facts__meta">Dec 2023 - Present</dd>
+              <dt>Physical evidence</dt>
+              <dd>I trust a system more after it survives contact with hardware.</dd>
             </div>
             <div>
-              <dt>LOGIVAN</dt>
-              <dd>AI Automation and Software Engineering Intern</dd>
-              <dd className="about-facts__meta">Apr - Jul 2026</dd>
-            </div>
-            <div>
-              <dt>UEH University</dt>
-              <dd>Bachelor of Logistics Technology, CGPA 3.52 / 4.00</dd>
-              <dd className="about-facts__meta">Coursework completed</dd>
+              <dt>Operational value</dt>
+              <dd>A robot matters when it improves a workflow, not when it only looks impressive.</dd>
             </div>
             <div>
               <dt>Communication</dt>
-              <dd>Vietnamese, English IELTS 7.5, basic Chinese</dd>
-              <dd className="about-facts__meta">Technical and cross-functional</dd>
+              <dd>I document decisions and explain technical trade-offs in Vietnamese or English.</dd>
+            </div>
+            <div>
+              <dt>Next</dt>
+              <dd>Available for full-time robotics, simulation, and embodied-AI roles.</dd>
             </div>
           </dl>
         </div>

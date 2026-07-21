@@ -67,14 +67,22 @@ const MediaLightbox: React.FC<MediaLightboxProps> = ({ state, onClose, onIndexCh
           </div>
 
           <motion.div
-            className="lightbox__stage"
+            className={`lightbox__stage ${isVideoMedia(state.media[state.index]) ? 'lightbox__stage--video' : ''}`}
             initial={reduceMotion ? false : { opacity: 0, scale: 0.985 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.985 }}
             onClick={(event) => event.stopPropagation()}
           >
             {isVideoMedia(state.media[state.index]) ? (
-              <video src={state.media[state.index]} controls autoPlay muted playsInline />
+              <video
+                src={state.media[state.index]}
+                poster={getMediaPreview(state.media[state.index])}
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
             ) : (
               <img src={state.media[state.index]} alt={`${state.title}, media ${state.index + 1}`} />
             )}

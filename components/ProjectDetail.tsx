@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, Check, Github, ZoomIn } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check, Github, Play, ZoomIn } from 'lucide-react';
 import { Project } from '../types';
-import { getMediaPreview, isVideoMedia } from '../lib/media';
+import { getMediaPreview, getProjectMedia, isVideoMedia } from '../lib/media';
+import AutoplayVideo from './AutoplayVideo';
 import MediaLightbox, { MediaLightboxState } from './MediaLightbox';
 
 interface ProjectDetailProps {
@@ -19,12 +20,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
   }, [project.id]);
 
   const galleryMedia = useMemo(() => {
-    const media = [project.imageUrl];
-    if (project.videoUrl && !project.videoUrl.includes('youtube.com/embed')) media.push(project.videoUrl);
-    if (project.secondaryImageUrl) media.push(project.secondaryImageUrl);
-    if (project.additionalMedia) media.push(...project.additionalMedia);
-    return Array.from(new Set(media.filter(Boolean)));
+    return getProjectMedia(project);
   }, [project]);
+
+  const heroMediaIndex = project.previewVideoUrl ? galleryMedia.indexOf(project.previewVideoUrl) : galleryMedia.indexOf(project.imageUrl);
 
   const openMedia = useCallback((index: number) => {
     setLightbox({ title: project.title, media: galleryMedia, index });
@@ -54,12 +53,16 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
           <p>{project.shortDescription}</p>
         </header>
 
-        <button type="button" className="project-detail-hero" onClick={() => openMedia(0)} aria-label="Open project media">
-          <img
-            src={project.imageUrl}
-            alt={project.title}
-            className={project.imageFit === 'contain' ? 'is-contain' : ''}
-          />
+        <button type="button" className="project-detail-hero" onClick={() => openMedia(Math.max(0, heroMediaIndex))} aria-label="Open project media">
+          {project.previewVideoUrl ? (
+            <AutoplayVideo src={project.previewVideoUrl} poster={project.posterUrl || project.imageUrl} />
+          ) : (
+            <img
+              src={project.imageUrl}
+              alt={project.title}
+              className={project.imageFit === 'contain' ? 'is-contain' : ''}
+            />
+          )}
           <span title="Open media"><ZoomIn size={19} /></span>
         </button>
 
@@ -107,17 +110,17 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
               <section>
                 <h2>Build media</h2>
                 <div className="project-gallery">
-                  {galleryMedia.slice(1).map((media, index) => (
+                  {galleryMedia.filter((_, index) => index !== heroMediaIndex).map((media) => (
                     <button
                       type="button"
                       key={media}
-                      onClick={() => openMedia(index + 1)}
-                      aria-label={`Open project media ${index + 2}`}
+                      onClick={() => openMedia(galleryMedia.indexOf(media))}
+                      aria-label={`Open ${project.title} media`}
                     >
                       {isVideoMedia(media) ? (
-                        <video src={media} muted playsInline />
+                        <AutoplayVideo src={media} poster={getMediaPreview(media)} />
                       ) : (
-                        <img src={getMediaPreview(media)} alt={`${project.title}, view ${index + 2}`} loading="lazy" />
+                        <img src={getMediaPreview(media)} alt={`${project.title} build view`} loading="lazy" />
                       )}
                       <span title="Open media"><ZoomIn size={17} /></span>
                     </button>
@@ -150,9 +153,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
             </dl>
 
             <div className="project-detail-links">
+              {project.demoUrl && (
+                <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                  <Play size={18} /> Watch full demo <ArrowUpRight size={15} />
+                </a>
+              )}
               {project.repoUrl && (
                 <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                  <Github size={18} /> Source and profile <ArrowUpRight size={15} />
+                  <Github size={18} /> Source code <ArrowUpRight size={15} />
                 </a>
               )}
               <a

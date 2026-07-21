@@ -14,10 +14,10 @@ const TypingHero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="hero__eyebrow">Robotics software engineer and AI systems builder</p>
-          <h1>I build robots that learn and act.</h1>
+          <p className="hero__eyebrow">Robotics engineer in Ho Chi Minh City</p>
+          <h1>I build robots people can talk to, teach, and trust.</h1>
           <p className="hero__summary">
-            Hoang Quoc Viet builds embodied AI, robot-learning systems and automation for real operations.
+            I am Viet. I work across robot learning, voice agents, simulation, and logistics automation, then test the ideas on real hardware.
           </p>
           <div className="hero__actions">
             <a className="button button--primary" href="#work">
@@ -36,11 +36,14 @@ const TypingHero: React.FC = () => {
           transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="hero__portrait-frame">
-            <img src="/profile-picture-optimized.webp" alt="Hoang Quoc Viet" />
+            <picture>
+              <source media="(max-width: 560px)" srcSet="/profile-running-640.webp" />
+              <img src="/profile-running-1600.webp" alt="Hoang Quoc Viet running the UEH half marathon" />
+            </picture>
           </div>
           <figcaption>
             <span>Hoang Quoc Viet</span>
-            <span>Available for full-time robotics roles</span>
+            <span>Builder, researcher, runner</span>
           </figcaption>
         </motion.figure>
       </div>
