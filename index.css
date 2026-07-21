@@ -334,7 +334,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
   transform: none;
 }
 
@@ -510,6 +510,9 @@ button {
 }
 
 .project-card--standard {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
   border-top: 1px solid var(--line);
   padding-top: 22px;
 }
@@ -528,6 +531,11 @@ button {
 
 .project-card--lead .project-card__media {
   min-height: 490px;
+  aspect-ratio: auto;
+}
+
+.project-card--standard .project-card__media {
+  height: clamp(360px, 28vw, 440px);
   aspect-ratio: auto;
 }
 
@@ -569,6 +577,17 @@ button {
 
 .project-card__body {
   padding: 24px 0 0;
+}
+
+.project-card--standard .project-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.project-card--standard .project-card__footer {
+  margin-top: auto;
+  padding-top: 24px;
 }
 
 .project-card--lead .project-card__body {
@@ -1542,6 +1561,20 @@ button {
   .project-card--lead .project-card__media {
     min-height: 0;
     aspect-ratio: 4 / 3;
+  }
+
+  .project-card--standard .project-card__media {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-card--standard .project-card__body {
+    display: block;
+  }
+
+  .project-card--standard .project-card__footer {
+    margin-top: 24px;
+    padding-top: 0;
   }
 
   .project-card--lead .project-card__body {
