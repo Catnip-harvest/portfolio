@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
     impact:
       'It created a reliable baseline for localization and navigation work later reused in the warehouse robotics program.',
     tags: ['ROS 2', 'Nav2', 'SLAM', 'LiDAR', 'URDF'],
-    imageUrl: '/turtlebot-3d-model-poster.webp',
+    imageUrl: '/turtlebot-3d-model.gif',
     imageFit: 'contain',
     previewVideoUrl: '/turtlebot-teleoperating-preview.mp4',
     posterUrl: '/turtlebot-teleoperating-poster.webp',
