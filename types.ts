@@ -8,6 +8,8 @@ export interface Project {
   tags: string[];
   imageUrl: string;
   imageFit?: 'cover' | 'contain';
+  previewVideoUrl?: string;
+  posterUrl?: string;
   videoUrl?: string;
   secondaryImageUrl?: string;
   additionalMedia?: string[];

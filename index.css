@@ -310,7 +310,7 @@ button {
 }
 
 .hero__portrait {
-  width: min(100%, 410px);
+  width: min(100%, 380px);
   margin: 0 0 0 auto;
 }
 
@@ -322,12 +322,19 @@ button {
   background: var(--surface-subtle);
 }
 
-.hero__portrait-frame img {
-  width: 94%;
+.hero__portrait-frame picture {
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
-  object-fit: contain;
-  object-position: center bottom;
+  display: block;
+}
+
+.hero__portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 41% center;
+  transform: scale(2.1);
+  transform-origin: 41% 14%;
 }
 
 .hero__portrait figcaption {
@@ -435,6 +442,10 @@ button {
   font-weight: 690;
 }
 
+.now-list__label {
+  padding-top: 4px;
+}
+
 .now-list h3 {
   margin: 0;
   font-size: 24px;
@@ -519,7 +530,8 @@ button {
   aspect-ratio: auto;
 }
 
-.project-card__media img {
+.project-card__media img,
+.project-card__media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -531,7 +543,8 @@ button {
   padding: 18px;
 }
 
-.project-card__media:hover img {
+.project-card__media:hover img,
+.project-card__media:hover video {
   transform: scale(1.015);
 }
 
@@ -1039,6 +1052,19 @@ button {
   object-fit: contain;
 }
 
+.lightbox__stage--video {
+  width: min(100%, 1280px);
+  min-height: auto;
+  aspect-ratio: 16 / 9;
+  align-self: center;
+  justify-self: center;
+}
+
+.lightbox__stage--video video {
+  width: 100%;
+  height: 100%;
+}
+
 .lightbox__arrow {
   position: absolute;
   top: 50%;
@@ -1154,7 +1180,8 @@ button {
   cursor: zoom-in;
 }
 
-.project-detail-hero img {
+.project-detail-hero img,
+.project-detail-hero video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1482,7 +1509,7 @@ button {
   }
 
   .hero__portrait {
-    width: min(100%, 470px);
+    width: min(100%, 340px);
     margin: 0;
   }
 
@@ -1586,11 +1613,26 @@ button {
   .hero__portrait figcaption {
     display: grid;
     gap: 5px;
+    margin-top: 0;
+  }
+
+  .hero__portrait {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 116px minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
   }
 
   .hero__portrait-frame {
-    height: 150px;
-    aspect-ratio: auto;
+    width: 116px;
+    height: 116px;
+    aspect-ratio: 1;
+  }
+
+  .hero__portrait-frame img {
+    transform: scale(4.5);
+    transform-origin: 41% 7%;
   }
 
   .section {

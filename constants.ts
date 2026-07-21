@@ -2,6 +2,33 @@ import { Accomplishment, Certification, Project } from './types';
 
 export const PROJECTS: Project[] = [
   {
+    id: 'mira-voice-agent',
+    title: 'Mira: Voice-Controlled Physical Agent',
+    shortDescription:
+      'A voice-first SO101 robot that turns natural-language intent into safe gestures, visual scans, and conversational feedback.',
+    fullDescription:
+      'Mira is a phone-friendly physical agent built around an SO101 follower arm. Spoken or typed requests are routed through Agora Conversational AI into explicit robot tools for waving, dancing, nodding, scanning, and stopping. I built the FastAPI control service, hardware-aware launcher, process ownership, run history, and mobile control room. For visual search, Mira replays a recorded scan motion, captures four wrist-camera viewpoints, and asks Gemini to locate the requested object before reporting the result. Gesture replay is kept deliberately separate from the future learned screwdriver policy so the demo remains honest, testable, and safe.',
+    impact:
+      'Mira became a Top 5 finalist at Agentic AI Build Week and demonstrated an end-to-end loop across voice, tool calling, robot motion, camera perception, and safety controls.',
+    tags: ['Agora ConvoAI', 'LeRobot', 'FastAPI', 'SO101', 'Gemini'],
+    imageUrl: '/mira-demo-poster.webp',
+    previewVideoUrl: '/mira-demo-preview.mp4',
+    posterUrl: '/mira-demo-poster.webp',
+    videoUrl: 'https://www.youtube.com/embed/rNHOZqLiyZs?autoplay=1&mute=1&rel=0',
+    features: [
+      'Agora voice sessions and natural-language robot tool calls',
+      'Five expressive SO101 gestures with busy-state protection',
+      'Four-view wrist-camera scan with Gemini visual matching',
+      'Single-process ownership and escalating emergency stop',
+      'Mobile control room, live status, logs, and run history',
+    ],
+    date: 'Jul 2026',
+    role: 'Robotics and AI Engineer',
+    repoUrl: 'https://github.com/Catnip-harvest/agora',
+    demoUrl: 'https://www.youtube.com/watch?v=rNHOZqLiyZs',
+    featured: true,
+  },
+  {
     id: 'so101-imitation-learning',
     title: 'SO101 Robot Learning System',
     shortDescription:
@@ -13,7 +40,9 @@ export const PROJECTS: Project[] = [
     tags: ['ROS 2', 'LeRobot', 'ACT', 'Isaac Sim', 'Robot Learning'],
     imageUrl: '/capstone-so101-training-optimized.webp',
     imageFit: 'cover',
-    videoUrl: '/capstone-arm-picking.gif',
+    previewVideoUrl: '/capstone-arm-picking-preview.mp4',
+    posterUrl: '/capstone-arm-picking-poster.webp',
+    videoUrl: '/capstone-arm-picking-preview.mp4',
     features: [
       'Low-latency leader-follower control in ROS 2',
       '250 physical demonstration episodes',
@@ -37,9 +66,9 @@ export const PROJECTS: Project[] = [
     tags: ['ROS 2', 'Isaac Sim', 'MoveIt', 'Digital Twin', 'AMR'],
     imageUrl: '/capstone-optimized.webp',
     imageFit: 'cover',
-    videoUrl: 'https://www.youtube.com/embed/kH4mvG7b4qc',
+    videoUrl: 'https://www.youtube.com/embed/kH4mvG7b4qc?autoplay=1&mute=1&rel=0',
     secondaryImageUrl: '/capstone-digital-twin-optimized.webp',
-    additionalMedia: ['/capstone-circuit-optimized.webp', '/capstone-arm-picking.gif'],
+    additionalMedia: ['/capstone-circuit-optimized.webp', '/capstone-arm-picking-preview.mp4'],
     features: [
       'Custom AMR, dual-crane, and manipulator architecture',
       'URDF kinematics, collision, and material configuration',
@@ -64,7 +93,9 @@ export const PROJECTS: Project[] = [
     tags: ['ROS 2', 'Nav2', 'SLAM', 'LiDAR', 'URDF'],
     imageUrl: '/turtlebot-3d-model-poster.webp',
     imageFit: 'contain',
-    videoUrl: '/turtlebot-teleoperating.gif',
+    previewVideoUrl: '/turtlebot-teleoperating-preview.mp4',
+    posterUrl: '/turtlebot-teleoperating-poster.webp',
+    videoUrl: '/turtlebot-teleoperating-preview.mp4',
     features: [
       '2D LiDAR mapping and localization',
       'Wheel odometry calibration',
@@ -74,7 +105,7 @@ export const PROJECTS: Project[] = [
     date: 'Dec 2025',
     role: 'ROS 2 Developer',
     collaborators: ['Nhi Hoang', 'Tan Tai', 'Thanh Ly'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'vrp',
@@ -130,7 +161,8 @@ export const PROJECTS: Project[] = [
     tags: ['CAD', 'Embedded Systems', 'G-code', 'Motion Control'],
     imageUrl: '/2-dof-robot-arm-poster.webp',
     imageFit: 'contain',
-    videoUrl: '/2-dof-robot-arm.gif',
+    videoUrl: '/2-dof-robot-arm-preview.mp4',
+    posterUrl: '/2-dof-robot-arm-poster.webp',
     features: [
       'Custom CAD and 3D-printed mechanics',
       'Stepper motor integration',
