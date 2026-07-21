@@ -311,6 +311,8 @@ button {
 
 .hero__portrait {
   width: min(100%, 380px);
+  position: relative;
+  top: -48px;
   margin: 0 0 0 auto;
 }
 
@@ -1510,6 +1512,7 @@ button {
 
   .hero__portrait {
     width: min(100%, 340px);
+    top: 0;
     margin: 0;
   }
 
@@ -1631,8 +1634,9 @@ button {
   }
 
   .hero__portrait-frame img {
-    transform: scale(4.5);
-    transform-origin: 41% 7%;
+    object-position: center;
+    transform: none;
+    transform-origin: center;
   }
 
   .section {

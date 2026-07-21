@@ -37,7 +37,7 @@ const TypingHero: React.FC = () => {
         >
           <div className="hero__portrait-frame">
             <picture>
-              <source media="(max-width: 560px)" srcSet="/profile-running-640.webp" />
+              <source media="(max-width: 560px)" srcSet="/profile-running-mobile.webp" />
               <img src="/profile-running-1600.webp" alt="Hoang Quoc Viet running the UEH half marathon" />
             </picture>
           </div>
