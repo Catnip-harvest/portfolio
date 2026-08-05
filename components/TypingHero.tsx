@@ -14,10 +14,10 @@ const TypingHero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="hero__eyebrow">Robotics engineer in Ho Chi Minh City</p>
-          <h1>I build robots people can talk to, teach, and trust.</h1>
+          <p className="hero__eyebrow">Builder across AI, data, and products</p>
+          <h1>I build useful things from complex problems.</h1>
           <p className="hero__summary">
-            I am Viet. I work across robot learning, voice agents, simulation, and logistics automation, then test the ideas on real hardware.
+            I move from messy questions to working outcomes across AI, data, software, automation, and physical systems. I like understanding the problem, building the solution, and learning from how people use it.
           </p>
           <div className="hero__actions">
             <a className="button button--primary" href="#work">

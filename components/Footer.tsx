@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <footer id="contact" className="footer">
       <div className="footer__inner">
         <div className="footer__cta">
-          <p>Available for full-time robotics and AI engineering roles.</p>
+          <p>Available for full-time roles across product, data, AI, and software.</p>
           <h2>Let&apos;s build a system that moves.</h2>
           <a className="button button--primary" href="mailto:84.viethoang@gmail.com">
             Contact <Mail size={18} />
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
         <div className="footer__bottom">
           <div>
             <strong>Hoang Quoc Viet</strong>
-            <span>Robotics software engineer</span>
+            <span>Builder across AI, data, and products</span>
           </div>
           <nav aria-label="Social links">
             <a href="https://github.com/Catnip-harvest" target="_blank" rel="noopener noreferrer">

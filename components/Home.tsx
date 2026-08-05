@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         <div className="section__inner">
           <div className="section-heading section-heading--narrow">
             <h2>Built, tested, and shown working.</h2>
-            <p>Robots and intelligent systems I designed, assembled, debugged, and evaluated beyond the slide deck.</p>
+            <p>Projects across AI, data, software, automation, and physical systems, built and tested beyond the slide deck.</p>
           </div>
 
           <div className="featured-work">
@@ -123,12 +123,12 @@ const Home: React.FC = () => {
       <section id="about" className="section section--about">
         <div className="section__inner about-layout">
           <div className="about-story">
-            <h2>Logistics taught me where systems break. Robotics lets me rebuild them.</h2>
+            <h2>I like turning messy questions into things people can use.</h2>
             <p>
-              I study Logistics Technology at UEH University, but my work moved steadily toward automation, robot learning, and digital twins. That combination helps me connect an engineering decision to the operation it must improve.
+              I study Logistics Technology at UEH University and work across software, data, AI, automation, and physical systems. That range helps me connect a technical decision to the people, workflow, or product it needs to improve.
             </p>
             <p>
-              I have completed my academic coursework one year early and am available for full-time roles in robotics software, simulation, embodied AI, and intelligent automation.
+              I have completed my academic coursework one year early and am available for full-time roles where I can understand a problem, make a useful first version, and improve it with evidence.
             </p>
           </div>
 
@@ -147,7 +147,7 @@ const Home: React.FC = () => {
             </div>
             <div>
               <dt>Next</dt>
-              <dd>Available for full-time robotics, simulation, and embodied-AI roles.</dd>
+              <dd>Available for full-time roles across product, data, AI, and software.</dd>
             </div>
           </dl>
         </div>

@@ -39,7 +39,7 @@ const App: React.FC = () => {
         <div className="site-header__inner">
           <Link className="wordmark" to="/" aria-label="Hoang Quoc Viet, home">
             <span className="wordmark__name">Hoang Quoc Viet</span>
-            <span className="wordmark__role">Robotics + AI</span>
+            <span className="wordmark__role">Builder</span>
           </Link>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
