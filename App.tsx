@@ -28,6 +28,7 @@ const App: React.FC = () => {
   const homePrefix = location.pathname === '/' ? '' : '/';
   const navigation = [
     { label: 'Work', href: `${homePrefix}#work` },
+    { label: 'Experience', href: `${homePrefix}#experience` },
     { label: 'Notes', href: `${homePrefix}#now` },
     { label: 'Recognition', href: `${homePrefix}#recognition` },
     { label: 'About', href: `${homePrefix}#about` },

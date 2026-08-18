@@ -15,7 +15,7 @@ const Certifications: React.FC = () => {
           <p>Language, analytics, robotics, and software foundations that support the engineering work.</p>
           <a
             className="text-link"
-            href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/details/certifications/"
+            href="https://www.linkedin.com/in/vizhoang/details/certifications/"
             target="_blank"
             rel="noopener noreferrer"
           >

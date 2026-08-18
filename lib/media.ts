@@ -18,7 +18,7 @@ export const isVideoMedia = (url: string) => /\.(mp4|webm)$/i.test(url);
 export const getProjectMedia = (project: Project) => {
   const media: string[] = [];
   if (project.previewVideoUrl) media.push(project.previewVideoUrl);
-  media.push(project.imageUrl);
+  if (project.imageUrl) media.push(project.imageUrl);
   if (project.videoUrl && !project.videoUrl.includes('youtube.com/embed')) media.push(project.videoUrl);
   if (project.secondaryImageUrl) media.push(project.secondaryImageUrl);
   if (project.additionalMedia) media.push(...project.additionalMedia);

@@ -6,7 +6,7 @@ export interface Project {
   fullDescription: string;
   impact?: string;
   tags: string[];
-  imageUrl: string;
+  imageUrl?: string;
   imageFit?: 'cover' | 'contain';
   previewVideoUrl?: string;
   posterUrl?: string;
