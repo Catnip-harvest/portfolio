@@ -23,7 +23,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
     return getProjectMedia(project);
   }, [project]);
 
-  const heroMediaIndex = project.previewVideoUrl ? galleryMedia.indexOf(project.previewVideoUrl) : galleryMedia.indexOf(project.imageUrl);
+  const hasHeroMedia = Boolean(project.previewVideoUrl || project.imageUrl);
+  const heroMediaIndex = project.previewVideoUrl
+    ? galleryMedia.indexOf(project.previewVideoUrl)
+    : project.imageUrl
+      ? galleryMedia.indexOf(project.imageUrl)
+      : -1;
 
   const openMedia = useCallback((index: number) => {
     setLightbox({ title: project.title, media: galleryMedia, index });
@@ -53,18 +58,20 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
           <p>{project.shortDescription}</p>
         </header>
 
-        <button type="button" className="project-detail-hero" onClick={() => openMedia(Math.max(0, heroMediaIndex))} aria-label="Open project media">
-          {project.previewVideoUrl ? (
-            <AutoplayVideo src={project.previewVideoUrl} poster={project.posterUrl || project.imageUrl} />
-          ) : (
-            <img
-              src={project.imageUrl}
-              alt={project.title}
-              className={project.imageFit === 'contain' ? 'is-contain' : ''}
-            />
-          )}
-          <span title="Open media"><ZoomIn size={19} /></span>
-        </button>
+        {hasHeroMedia && (
+          <button type="button" className="project-detail-hero" onClick={() => openMedia(Math.max(0, heroMediaIndex))} aria-label="Open project media">
+            {project.previewVideoUrl ? (
+              <AutoplayVideo src={project.previewVideoUrl} poster={project.posterUrl || project.imageUrl} />
+            ) : (
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className={project.imageFit === 'contain' ? 'is-contain' : ''}
+              />
+            )}
+            <span title="Open media"><ZoomIn size={19} /></span>
+          </button>
+        )}
 
         <div className="project-detail-layout">
           <article className="project-detail-copy">
@@ -164,7 +171,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
                 </a>
               )}
               <a
-                href="https://www.linkedin.com/in/vi%E1%BB%87t-ho%C3%A0ng-20324a234/"
+                href="https://www.linkedin.com/in/vizhoang"
                 target="_blank"
                 rel="noopener noreferrer"
               >
