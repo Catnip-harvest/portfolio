@@ -92,6 +92,13 @@ export const PROJECTS: Project[] = [
     impact:
       'Three failures root-caused rather than worked around, and one model rejected on measurement instead of shipped.',
     tags: ['llama.cpp', 'GGUF quantisation', 'Zipformer ASR', 'QRB2210', 'Edge inference'],
+    imageUrl: '/qualcomm-uno-q-rig.webp',
+    imageFit: 'cover',
+    additionalMedia: [
+      '/qualcomm-uno-q-board.webp',
+      '/qualcomm-uno-q-arm.webp',
+      '/qualcomm-uno-q-gripper.webp',
+    ],
     features: [
       'Board-wide power crash traced to a single USB-C port both powering the board and back-feeding a nested hub against a fixed 5 V / 3 A PD profile, fixed with an independently powered single-stage hub',
       'Wake-word classifier never fired on Mira mid-phrase, having been trained only on isolated TTS words with a 1.6 s window that clipped word tails, replaced with fuzzy matching over ASR transcripts, which render the name at least eight different ways',
@@ -103,6 +110,7 @@ export const PROJECTS: Project[] = [
     date: 'Aug 2026',
     role: 'Team member, power root cause, wake-word fix, quantisation benchmarks',
     repoUrl: 'https://github.com/fountainhead-2207/Qualcom_Mira',
+    featured: true,
   },
   {
     id: 'healix',
