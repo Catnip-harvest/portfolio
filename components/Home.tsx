@@ -11,6 +11,27 @@ import MediaLightbox, { MediaLightboxState } from './MediaLightbox';
 import ProjectCard from './ProjectCard';
 import TypingHero from './TypingHero';
 
+const EXPERIENCE = [
+  {
+    label: 'Apr 2026 - Jul 2026',
+    title: 'AI Data Analyst, LOGIVAN',
+    description:
+      'Automated ad-hoc P&L reporting by scraping real-time data from customer portals, removing a manual month-end delay. Built LLM and VLM extraction pipelines turning invoices, bills of lading and proof-of-delivery into schema-valid JSON, with validation logic and edge-case tests so unvalidated fields never reached the database. Also built n8n and JavaScript automation connecting an AI chatbot to Zalo over REST, and data-quality notebooks and dashboards in Holistics and Hex.tech.',
+  },
+  {
+    label: 'Dec 2023 - Present',
+    title: 'Robotics and AI Researcher, OpenLab at UEH University',
+    description:
+      'Undergraduate researcher, supervised by Nguyen Minh Trieu. Joined within months of enrolling, and the robot-learning and digital-twin work below comes out of this lab.',
+  },
+  {
+    label: '2024 - 2025',
+    title: 'Teaching',
+    description:
+      'Freelance English tutor for IELTS and PTE preparation, early 2024 to 2025. Volunteer English teacher at SOS Children’s Village, Hai Phong, June to August 2025, teaching a student group at an NGO providing family-based care for children who have lost parental care.',
+  },
+];
+
 const FIELD_NOTES = [
   {
     label: 'Human to robot',
@@ -92,6 +113,32 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      <section id="experience" className="section section--now">
+        <div className="section__inner now-layout">
+          <div className="section-heading section-heading--narrow">
+            <h2>Where I have worked.</h2>
+            <p>Industry data work, a university robotics lab, and teaching.</p>
+          </div>
+          <div className="now-list">
+            {EXPERIENCE.map((item, index) => (
+              <motion.article
+                key={item.title}
+                initial={reduceMotion ? false : { opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+              >
+                <span className="now-list__label">{item.label}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="now" className="section section--now">
         <div className="section__inner now-layout">
           <div className="section-heading section-heading--narrow">
@@ -125,29 +172,29 @@ const Home: React.FC = () => {
           <div className="about-story">
             <h2>I like turning messy questions into things people can use.</h2>
             <p>
-              I study Logistics Technology at UEH University and work across software, data, AI, automation, and physical systems. That range helps me connect a technical decision to the people, workflow, or product it needs to improve.
+              I am reading Logistics Technology at UEH University, and I work across software, data, AI, automation and physical systems. That range helps me connect a technical decision to the people, workflow or product it needs to improve.
             </p>
             <p>
-              I have completed my academic coursework one year early and am available for full-time roles where I can understand a problem, make a useful first version, and improve it with evidence.
+              I would rather publish the number I measured and name the part that does not work yet than round either one up. Most of what I have learned came from the second kind: a power crash traced to a single overloaded USB port, a wake word that never fired mid-sentence, a policy that was unstable because the camera moved rather than because the model was wrong.
             </p>
           </div>
 
           <dl className="about-facts">
             <div>
-              <dt>Physical evidence</dt>
-              <dd>I trust a system more after it survives contact with hardware.</dd>
+              <dt>Education</dt>
+              <dd>BSc Logistics Technology, UEH University, 2023 to 2027 expected. CGPA 3.52 / 4.00.</dd>
             </div>
             <div>
-              <dt>Operational value</dt>
-              <dd>A robot matters when it improves a workflow, not when it only looks impressive.</dd>
+              <dt>Availability</dt>
+              <dd>Coursework completed Jun 2026. Thesis defence Dec 2026. Degree conferred Mar 2027 expected. Available full-time now.</dd>
             </div>
             <div>
-              <dt>Communication</dt>
-              <dd>I document decisions and explain technical trade-offs in Vietnamese or English.</dd>
+              <dt>Languages</dt>
+              <dd>Vietnamese native. English, IELTS 7.5. Chinese, HSK 1.</dd>
             </div>
             <div>
-              <dt>Next</dt>
-              <dd>Available for full-time roles across product, data, AI, and software.</dd>
+              <dt>Based</dt>
+              <dd>Ho Chi Minh City, Vietnam. Open to Hanoi and to relocation.</dd>
             </div>
           </dl>
         </div>

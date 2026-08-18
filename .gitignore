@@ -35,3 +35,6 @@ lighthouse-*.json
 
 .vercel
 .env*
+
+# Local agent tooling
+.claude/
