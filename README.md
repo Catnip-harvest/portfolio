@@ -5,6 +5,10 @@ automation and physical systems.
 
 Live at **[vizhoang.vercel.app](https://vizhoang.vercel.app)**.
 
+![Mira, a voice-controlled SO-101 arm, responding to a spoken request](public/mira-demo.gif)
+
+*Mira: a spoken request becomes an LLM tool call becomes arm motion. [Full demo](https://www.youtube.com/watch?v=rNHOZqLiyZs).*
+
 ## What this is
 
 A single-page React site. Project content lives in one file, [`constants.ts`](constants.ts),

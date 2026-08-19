@@ -34,22 +34,28 @@ const EXPERIENCE = [
 
 const FIELD_NOTES = [
   {
-    label: 'Human to robot',
-    title: 'Making physical agents easier to command',
+    label: 'Measure before believing',
+    title: 'The benchmark that contradicted the assumption',
     description:
-      'Mira explores the interface between ordinary language and explicit, inspectable robot tools.',
+      'Q4_K_M is the quantisation everyone reaches for, and on the Arduino UNO Q it was both bigger and slower than Q4_0 — 463 MB at 16.65 tokens/s against 403 MB at 20.09. Not a bug: llama.cpp repacks Q4_0 for ARM. I would not have guessed that, which is the entire argument for benchmarking instead of assuming.',
   },
   {
-    label: 'Simulation to hardware',
-    title: 'Finding failure before deployment',
+    label: 'Suspect the observation',
+    title: 'The model was fine. The camera moved.',
     description:
-      'Digital twins let me test navigation, manipulation, and sensor assumptions before the physical system pays the price.',
+      'An ACT policy kept destabilising across rollouts, and the instinct is to blame the policy and retrain. Reading five-episode batches instead of single runs showed the failures tracked lighting and camera viewpoint. The fix was a CAD-designed rigid camera mount, not a better network.',
   },
   {
-    label: 'Operations to software',
-    title: 'Automating the awkward middle of logistics',
+    label: 'Publish the negative result',
+    title: 'A rejection is a finding',
     description:
-      'I look for repetitive hand-offs, missing structure, and delayed information, then build the smallest useful automation around them.',
+      'MolmoAct2 measured 1.18x signal-to-noise across contradictory instructions — indistinguishable from noise. It is documented as a measured rejection rather than quietly dropped, because the next person to try it deserves the number.',
+  },
+  {
+    label: 'Name what is unfinished',
+    title: 'Where the chain still breaks',
+    description:
+      'On the edge build, speech reaches an object name and an image coordinate, and then stops: the step from coordinates to joint angles is missing, so grasping does not work. Saying so costs nothing and saves the next person a week.',
   },
 ];
 
@@ -142,8 +148,8 @@ const Home: React.FC = () => {
       <section id="now" className="section section--now">
         <div className="section__inner now-layout">
           <div className="section-heading section-heading--narrow">
-            <h2>Working notes.</h2>
-            <p>Three ideas that keep showing up in the systems I build.</p>
+            <h2>How I work, with the receipts.</h2>
+            <p>Four habits, each one attached to the thing that taught it to me.</p>
           </div>
           <div className="now-list">
             {FIELD_NOTES.map((item, index) => (
