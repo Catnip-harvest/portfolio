@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
     id: 'video2sim-so101',
     title: 'Video-to-Sim Data Engine: Physics-Verified SO-101 Training on AMD MI300X',
     shortDescription:
-      'One short stock video of a hand moving a cube in, 1,000 physics-checked robot demos out, then three robot policies (5.4B / 0.45B / <0.1B) trained and stress-tested on a single AMD MI300X.',
+      'One short stock video of a hand moving a cube in, 1,000 physics-checked robot demos out, then three robot policies (5.4B / 0.45B / <0.1B) trained on a single AMD MI300X and stress-tested, all in simulation.',
     fullDescription:
       'A short stock video of a hand moving a cube is turned into the cube’s path through the air and the moments it is gripped and released. A scripted expert then replays that cube path on a simulated SO-101 arm in MuJoCo, across scenes with randomised cube position, size, mass and friction, servo strength, lighting, colours and camera pose. Every demo has to pass a physics check before it is kept: both jaws really carry the cube, with no welds or teleporting, nothing collides, and the cube ends at rest in the tray. 1,000 of 1,055 attempts passed. On that data MolmoAct2 (5.4B) was fine-tuned on one AMD MI300X with ROCm, and SmolVLA (0.45B) and ACT (<0.1B) were trained for comparison. Each policy then drove the simulated arm on scenes it had never seen and on a ladder of out-of-range scenes, judged by physics alone and compared with paired statistics. Everything shown here, the numbers included, is in simulation. The MolmoAct2 rejection at 1.18x signal-to-noise noted elsewhere on this site came from a different, real-robot setup; this project fine-tunes MolmoAct2 in simulation only. The pipeline builds on published work, R2R2R, X-Sim, Squint and MuJoCo Menagerie. The contribution is the physics verification, the evaluation and the AMD build, not a new method.',
     impact:
@@ -20,16 +20,23 @@ export const PROJECTS: Project[] = [
       'Domain randomisation',
       'Synthetic data generation',
     ],
-    imageUrl: '/video2sim-poster.webp',
-    previewVideoUrl: '/video2sim-preview.mp4',
-    posterUrl: '/video2sim-poster.webp',
-    videoUrl: '/video2sim-final-trial1-preview.mp4',
+    // Lead media is the 14 s pipeline reel (human clip -> cube path -> sim demo -> trained policy).
+    // Its panel titles and Simulation badge run close to the frame edges, so the card and the
+    // case-study header letterbox it (videoFit: 'contain') instead of cropping to 4:3.
+    // No imageUrl: posterUrl covers the card, and an imageUrl would add a cropped still of the
+    // reel to the gallery.
+    previewVideoUrl: '/video2sim-pipeline-preview.mp4',
+    posterUrl: '/video2sim-pipeline-poster.webp',
+    videoUrl: '/video2sim-pipeline-preview.mp4',
+    videoFit: 'contain',
     additionalMedia: [
+      '/video2sim-preview.mp4',
+      '/video2sim-final-trial1-preview.mp4',
       '/video2sim-final-trial3-preview.mp4',
       '/video2sim-expert-demo-preview.mp4',
       // Reserved slot: the MolmoAct2 | SmolVLA | ACT side-by-side comparison. When it is rendered,
       // add '/video2sim-policy-comparison-preview.mp4' here and map its '-poster.webp' in lib/media.ts.
-      // Same 1024x576 frame and burned-in "Simulation (MuJoCo)" badge as the other clips.
+      // Same 1024x576 frame and burned-in "Simulation (MuJoCo)" badge as the other gallery clips.
     ],
     features: [
       '1,000 of 1,055 generated demos passed the physics check (94.8%)',

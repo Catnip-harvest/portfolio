@@ -9,6 +9,7 @@ const MEDIA_PREVIEWS: Record<string, string> = {
   '/2-dof-robot-arm.gif': '/2-dof-robot-arm-poster.webp',
   '/2-dof-robot-arm-preview.mp4': '/2-dof-robot-arm-poster.webp',
   '/mira-demo-preview.mp4': '/mira-demo-poster.webp',
+  '/video2sim-pipeline-preview.mp4': '/video2sim-pipeline-poster.webp',
   '/video2sim-preview.mp4': '/video2sim-poster.webp',
   '/video2sim-final-trial1-preview.mp4': '/video2sim-final-trial1-poster.webp',
   '/video2sim-final-trial3-preview.mp4': '/video2sim-final-trial3-poster.webp',

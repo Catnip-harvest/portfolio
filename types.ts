@@ -9,6 +9,8 @@ export interface Project {
   imageUrl?: string;
   imageFit?: 'cover' | 'contain';
   previewVideoUrl?: string;
+  /** How the card and case-study header fit previewVideoUrl. Defaults to 'cover' (crop to fill). */
+  videoFit?: 'cover' | 'contain';
   posterUrl?: string;
   videoUrl?: string;
   secondaryImageUrl?: string;
