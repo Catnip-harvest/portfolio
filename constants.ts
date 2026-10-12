@@ -71,33 +71,6 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    id: 'so101-imitation-learning',
-    title: 'Dual SO-101 Teleoperation and ACT Imitation Learning',
-    shortDescription:
-      'A leader-follower teleoperation rig used to collect 250 demonstrations and evaluate an ACT policy through repeated rollout batches.',
-    fullDescription:
-      'I built a leader-follower teleoperation framework with synchronised closed-loop control between two SO-101 arms in ROS 2, bridged to an NVIDIA Isaac Sim digital twin. From that rig I collected 250 physical demonstration episodes and trained an Action Chunking with Transformers policy through Hugging Face LeRobot in a Docker and Conda environment. Evaluation ran in repeated five-episode rollout batches of up to about 90 seconds each, so I was reading recurring failure patterns rather than single successes. That is how the real problem surfaced: rollout instability traced to lighting and camera-viewpoint variation rather than to the policy. The fix was mechanical, a CAD-designed rigid camera fixture mounted to the robot so observations repeat.',
-    impact:
-      'Diagnosing the instability as an observation problem rather than a model problem turned an unrepeatable setup into one where results could be compared run to run.',
-    tags: ['ROS 2', 'LeRobot', 'ACT', 'Isaac Sim', 'Imitation learning'],
-    imageUrl: '/capstone-so101-training-optimized.webp',
-    imageFit: 'cover',
-    previewVideoUrl: '/capstone-arm-picking-preview.mp4',
-    posterUrl: '/capstone-arm-picking-poster.webp',
-    videoUrl: '/capstone-arm-picking-preview.mp4',
-    features: [
-      'Synchronised closed-loop leader-follower control in ROS 2',
-      '250 physical demonstration episodes collected',
-      'ACT policy trained and deployed via Hugging Face LeRobot',
-      'Repeated five-episode rollout batches, up to roughly 90 s per episode',
-      'CAD-designed rigid camera fixture, plus TPU and silicone soft grippers',
-      'VR controllers used for demonstration capture',
-    ],
-    date: 'Feb 2026 - Present',
-    role: 'Design and build',
-    featured: true,
-  },
-  {
     id: 'capstone',
     title: 'Smart AS/RS: Mobile Manipulator and Warehouse Digital Twin',
     shortDescription:
