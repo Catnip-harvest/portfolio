@@ -72,7 +72,16 @@ media render as text rows under "More projects and research" and still get a ful
 case-study page.
 
 Media conventions in `public/`: a `.webp` still for layout, an optional muted `.mp4`
-loop for cards, and a matching `-poster.webp` so nothing pops in on load.
+loop for cards, and a matching `-poster.webp` so nothing pops in on load. `.gitignore`
+keeps only `public/*-preview.mp4`, so every video the site serves must end in `-preview.mp4`
+or it never reaches Vercel. Any `.mp4` that
+appears in a gallery or the lightbox also needs its poster mapped in
+[`lib/media.ts`](lib/media.ts), or the browser is handed the video file as its poster.
+
+Cards and the case-study hero crop video to fill the frame (anything from 4:3 on a phone to
+about 1.8:1 on a wide screen), so a 16:9 clip keeps captions inside its central 4:3 band.
+Simulation footage carries a burned-in "Simulation (MuJoCo)" badge, so no clip can be
+mistaken for a real robot.
 
 ## A note on the content
 

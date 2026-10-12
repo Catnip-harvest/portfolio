@@ -2,6 +2,49 @@ import { Accomplishment, Certification, Project } from './types';
 
 export const PROJECTS: Project[] = [
   {
+    id: 'video2sim-so101',
+    title: 'Video-to-Sim Data Engine: Physics-Verified SO-101 Training on AMD MI300X',
+    shortDescription:
+      'One short stock video of a hand moving a cube in, 1,000 physics-checked robot demos out, then three robot policies (5.4B / 0.45B / <0.1B) trained and stress-tested on a single AMD MI300X.',
+    fullDescription:
+      'A short stock video of a hand moving a cube is turned into the cube’s path through the air and the moments it is gripped and released. A scripted expert then replays that cube path on a simulated SO-101 arm in MuJoCo, across scenes with randomised cube position, size, mass and friction, servo strength, lighting, colours and camera pose. Every demo has to pass a physics check before it is kept: both jaws really carry the cube, with no welds or teleporting, nothing collides, and the cube ends at rest in the tray. 1,000 of 1,055 attempts passed. On that data MolmoAct2 (5.4B) was fine-tuned on one AMD MI300X with ROCm, and SmolVLA (0.45B) and ACT (<0.1B) were trained for comparison. Each policy then drove the simulated arm on scenes it had never seen and on a ladder of out-of-range scenes, judged by physics alone and compared with paired statistics. Everything shown here, the numbers included, is in simulation. The pipeline builds on published work, R2R2R, X-Sim, Squint and MuJoCo Menagerie. The contribution is the physics verification, the evaluation and the AMD build, not a new method.',
+    impact:
+      'MolmoAct2 made a clean, physics-valid pick-and-place on 137 of 200 unseen simulated scenes (68.5%), got the cube into the tray on 79.0%, and showed no significant drop on any of 9 out-of-range tests. Wider data variety lifted ACT on unseen colours from 2/50 to 18/50 with no model change.',
+    tags: [
+      'MuJoCo',
+      'LeRobot',
+      'MolmoAct2',
+      'SmolVLA',
+      'ACT',
+      'AMD ROCm',
+      'Domain randomisation',
+      'Sim-to-real data',
+    ],
+    imageUrl: '/video2sim-poster.webp',
+    previewVideoUrl: '/video2sim-preview.mp4',
+    posterUrl: '/video2sim-poster.webp',
+    videoUrl: '/video2sim-final-trial1-preview.mp4',
+    additionalMedia: [
+      '/video2sim-final-trial3-preview.mp4',
+      '/video2sim-expert-demo-preview.mp4',
+      // Reserved slot: the MolmoAct2 | SmolVLA | ACT side-by-side comparison. When it is rendered,
+      // add '/video2sim-policy-comparison-preview.mp4' here and map its '-poster.webp' in lib/media.ts.
+      // Same 1024x576 frame and burned-in "Simulation (MuJoCo)" badge as the other clips.
+    ],
+    features: [
+      '1,000 of 1,055 generated demos passed the physics check (94.8%)',
+      '5.4B MolmoAct2 fine-tuned on one AMD MI300X with ROCm (23,400 steps, 8 h 52 min)',
+      '9-rung out-of-range test ladder (camera height, angle, distance, exposure, colours, distractors)',
+      'Paired exact McNemar tests with Holm correction and Wilson intervals',
+      'SmolVLA and ACT train under emulated 6 GB / 8 GB laptop memory caps',
+      'A negative result, published: picking the named cube among three failed, mostly through inaction, with no cube moved in about 75% of runs',
+    ],
+    date: 'Oct 2026',
+    role: 'Solo; AI-agent-orchestrated build',
+    repoUrl: 'https://github.com/Catnip-harvest/video2sim-so101',
+    featured: true,
+  },
+  {
     id: 'mira-voice-agent',
     title: 'Mira: Voice-Controlled Robot Agent',
     shortDescription:
