@@ -7,7 +7,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       'One short stock video of a hand moving a cube in, 1,000 physics-checked robot demos out, then three robot policies (5.4B / 0.45B / <0.1B) trained and stress-tested on a single AMD MI300X.',
     fullDescription:
-      'A short stock video of a hand moving a cube is turned into the cube’s path through the air and the moments it is gripped and released. A scripted expert then replays that cube path on a simulated SO-101 arm in MuJoCo, across scenes with randomised cube position, size, mass and friction, servo strength, lighting, colours and camera pose. Every demo has to pass a physics check before it is kept: both jaws really carry the cube, with no welds or teleporting, nothing collides, and the cube ends at rest in the tray. 1,000 of 1,055 attempts passed. On that data MolmoAct2 (5.4B) was fine-tuned on one AMD MI300X with ROCm, and SmolVLA (0.45B) and ACT (<0.1B) were trained for comparison. Each policy then drove the simulated arm on scenes it had never seen and on a ladder of out-of-range scenes, judged by physics alone and compared with paired statistics. Everything shown here, the numbers included, is in simulation. The pipeline builds on published work, R2R2R, X-Sim, Squint and MuJoCo Menagerie. The contribution is the physics verification, the evaluation and the AMD build, not a new method.',
+      'A short stock video of a hand moving a cube is turned into the cube’s path through the air and the moments it is gripped and released. A scripted expert then replays that cube path on a simulated SO-101 arm in MuJoCo, across scenes with randomised cube position, size, mass and friction, servo strength, lighting, colours and camera pose. Every demo has to pass a physics check before it is kept: both jaws really carry the cube, with no welds or teleporting, nothing collides, and the cube ends at rest in the tray. 1,000 of 1,055 attempts passed. On that data MolmoAct2 (5.4B) was fine-tuned on one AMD MI300X with ROCm, and SmolVLA (0.45B) and ACT (<0.1B) were trained for comparison. Each policy then drove the simulated arm on scenes it had never seen and on a ladder of out-of-range scenes, judged by physics alone and compared with paired statistics. Everything shown here, the numbers included, is in simulation. The MolmoAct2 rejection at 1.18x signal-to-noise noted elsewhere on this site came from a different, real-robot setup; this project fine-tunes MolmoAct2 in simulation only. The pipeline builds on published work, R2R2R, X-Sim, Squint and MuJoCo Menagerie. The contribution is the physics verification, the evaluation and the AMD build, not a new method.',
     impact:
       'MolmoAct2 made a clean, physics-valid pick-and-place on 137 of 200 unseen simulated scenes (68.5%), got the cube into the tray on 79.0%, and showed no significant drop on any of 9 out-of-range tests. Wider data variety lifted ACT on unseen colours from 2/50 to 18/50 with no model change.',
     tags: [
@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
       'ACT',
       'AMD ROCm',
       'Domain randomisation',
-      'Sim-to-real data',
+      'Synthetic data generation',
     ],
     imageUrl: '/video2sim-poster.webp',
     previewVideoUrl: '/video2sim-preview.mp4',
