@@ -13,7 +13,13 @@ import TypingHero from './TypingHero';
 
 const EXPERIENCE = [
   {
-    label: 'Apr 2026 - Jul 2026',
+    label: 'Feb 2026 - Present',
+    title: 'Software Engineer Fresher, Build Launch Iterate (BLI Inc.)',
+    description:
+      'Remote, for a Vancouver and Toronto firm. I build software with AI components for established businesses in regulated sectors such as lending, legal and accounting, keeping a person in the loop on every decision the client does not delegate, and ship features with AI coding agents through pull requests and code review, with QA evidence before merging.',
+  },
+  {
+    label: 'Jan 2026 - Jul 2026',
     title: 'AI Data Analyst, LOGIVAN',
     description:
       'Automated ad-hoc P&L reporting by scraping real-time data from customer portals, removing a manual month-end delay. Built LLM and VLM extraction pipelines turning invoices, bills of lading and proof-of-delivery into schema-valid JSON, with validation logic and edge-case tests so unvalidated fields never reached the database. Also built n8n and JavaScript automation connecting an AI chatbot to Zalo over REST, and data-quality notebooks and dashboards in Holistics and Hex.tech.',
