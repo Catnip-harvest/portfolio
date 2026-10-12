@@ -552,6 +552,13 @@ button {
   padding: 18px;
 }
 
+/* Project.videoFit: 'contain' letterboxes a lead video whose captions reach the frame edges.
+   The fill is the video2sim pipeline reel's own background, so the bars read as part of it. */
+.project-card__media video.is-contain {
+  object-fit: contain;
+  background: #0e1117;
+}
+
 .project-card__media:hover img,
 .project-card__media:hover video {
   transform: scale(1.015);
@@ -573,6 +580,14 @@ button {
   background: rgba(247, 249, 252, 0.94);
   color: #1e2734;
   box-shadow: 0 6px 18px rgba(27, 39, 58, 0.12);
+}
+
+/* A letterboxed reel keeps its "Simulation (MuJoCo)" badge in the top-right corner, so the
+   zoom button moves to the empty bottom-right corner rather than cover it. */
+.project-card__media:has(video.is-contain) .project-card__zoom,
+.project-detail-hero:has(video.is-contain) > span {
+  top: auto;
+  bottom: 14px;
 }
 
 .project-card__body {
@@ -1210,6 +1225,11 @@ button {
 .project-detail-hero img.is-contain {
   object-fit: contain;
   padding: 32px;
+}
+
+.project-detail-hero video.is-contain {
+  object-fit: contain;
+  background: #0e1117;
 }
 
 .project-detail-layout {

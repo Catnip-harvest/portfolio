@@ -61,7 +61,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
         {hasHeroMedia && (
           <button type="button" className="project-detail-hero" onClick={() => openMedia(Math.max(0, heroMediaIndex))} aria-label="Open project media">
             {project.previewVideoUrl ? (
-              <AutoplayVideo src={project.previewVideoUrl} poster={project.posterUrl || project.imageUrl} />
+              <AutoplayVideo
+                src={project.previewVideoUrl}
+                poster={project.posterUrl || project.imageUrl}
+                className={project.videoFit === 'contain' ? 'is-contain' : undefined}
+              />
             ) : (
               <img
                 src={project.imageUrl}

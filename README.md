@@ -80,6 +80,9 @@ appears in a gallery or the lightbox also needs its poster mapped in
 
 Cards and the case-study hero crop video to fill the frame (anything from 4:3 on a phone to
 about 1.8:1 on a wide screen), so a 16:9 clip keeps captions inside its central 4:3 band.
+A clip whose captions cannot fit that band sets `videoFit: 'contain'` on its project, and
+the card and hero then letterbox it instead of cropping. The video2sim pipeline reel does
+this: its panel titles and badge sit near the frame edges. Gallery tiles always crop to 4:3.
 Simulation footage carries a burned-in "Simulation (MuJoCo)" badge, so no clip can be
 mistaken for a real robot.
 

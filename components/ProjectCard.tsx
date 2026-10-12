@@ -42,7 +42,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, variant = 'standard'
         aria-label={`Open ${project.title} media`}
       >
         {project.previewVideoUrl ? (
-          <AutoplayVideo src={project.previewVideoUrl} poster={project.posterUrl || project.imageUrl} />
+          <AutoplayVideo
+            src={project.previewVideoUrl}
+            poster={project.posterUrl || project.imageUrl}
+            className={project.videoFit === 'contain' ? 'is-contain' : undefined}
+          />
         ) : (
           <img
             src={project.imageUrl}
