@@ -5,11 +5,11 @@ export const PROJECTS: Project[] = [
     id: 'video2sim-so101',
     title: 'Video-to-Sim Data Engine: Physics-Verified SO-101 Training on AMD MI300X',
     shortDescription:
-      'One short stock video of a hand moving a cube in, 1,000 physics-checked robot demos out, then three robot policies (5.4B / 0.45B / <0.1B) trained on a single AMD MI300X and stress-tested, all in simulation.',
+      'One short stock video of a hand moving a cube in, 1,000 physics-checked robot demos out, then three robot policies (5.4B / 0.45B / <0.1B) trained on a single AMD MI300X and stress-tested in simulation. A second run took MolmoAct2 to real SO-101 recordings and rebuilt that real rig in simulation.',
     fullDescription:
-      'A short stock video of a hand moving a cube is turned into the cube’s path through the air and the moments it is gripped and released. A scripted expert then replays that cube path on a simulated SO-101 arm in MuJoCo, across scenes with randomised cube position, size, mass and friction, servo strength, lighting, colours and camera pose. Every demo has to pass a physics check before it is kept: both jaws really carry the cube, with no welds or teleporting, nothing collides, and the cube ends at rest in the tray. 1,000 of 1,055 attempts passed. On that data MolmoAct2 (5.4B) was fine-tuned on one AMD MI300X with ROCm, and SmolVLA (0.45B) and ACT (<0.1B) were trained for comparison. Each policy then drove the simulated arm on scenes it had never seen and on a ladder of out-of-range scenes, judged by physics alone and compared with paired statistics. Everything shown here, the numbers included, is in simulation. The MolmoAct2 rejection at 1.18x signal-to-noise noted elsewhere on this site came from a different, real-robot setup; this project fine-tunes MolmoAct2 in simulation only. The pipeline builds on published work, R2R2R, X-Sim, Squint and MuJoCo Menagerie. The contribution is the physics verification, the evaluation and the AMD build, not a new method.',
+      'A short stock video of a hand moving a cube is turned into the cube’s path through the air and the moments it is gripped and released. A scripted expert then replays that cube path on a simulated SO-101 arm in MuJoCo, across scenes with randomised cube position, size, mass and friction, servo strength, lighting, colours and camera pose. Every demo has to pass a physics check before it is kept: both jaws really carry the cube, with no welds or teleporting, nothing collides, and the cube ends at rest in the tray. 1,000 of 1,055 attempts passed. On that data MolmoAct2 (5.4B) was fine-tuned on one AMD MI300X with ROCm, and SmolVLA (0.45B) and ACT (<0.1B) were trained for comparison. Each policy then drove the simulated arm on scenes it had never seen and on a ladder of out-of-range scenes, judged by physics alone and compared with paired statistics. A second MI300X run moved to real data: MolmoAct2 was fine-tuned on 474 teleoperated episodes recorded on a collaborator’s SO-101, then tested on 50 episodes it never saw by predicting the next second of actions from the recorded cameras and joint angles. That test is offline: the predictions are scored against what the human operator commanded, so it shows the model tracks a person’s control, not that the arm completes the task. The run also exposed a bug. MolmoAct2 squeezes every joint into a fixed range taken from its pretraining data and cuts off anything outside it, in training as well as at run time; on this arm wrist roll fell outside that range in 96% of frames, so the first model could only ever command one wrist angle (43.5°). Widening each range just enough to cover the real data cut the clipping to 0.18% or less per joint. The same engine then rebuilt the collaborator’s rig in simulation, with a camera fitted to each of the 19 recording sessions and the cube and bowl measured from the footage. All videos on this card are simulation; the real footage and the fine-tuned model stay private. The MolmoAct2 rejection at 1.18x signal-to-noise noted elsewhere on this site came from a different real-robot setup. The pipeline builds on published work, R2R2R, X-Sim, Squint and MuJoCo Menagerie. The contribution is the physics verification, the evaluation and the AMD build, not a new method.',
     impact:
-      'MolmoAct2 made a clean, physics-valid pick-and-place on 137 of 200 unseen simulated scenes (68.5%), got the cube into the tray on 79.0%, and showed no significant drop on any of 9 out-of-range tests. Wider data variety lifted ACT on unseen colours from 2/50 to 18/50 with no model change.',
+      'MolmoAct2 made a clean, physics-valid pick-and-place on 137 of 200 unseen simulated scenes (68.5%), got the cube into the tray on 79.0%, and showed no significant drop on any of 9 out-of-range tests. Wider data variety lifted ACT on unseen colours from 2/50 to 18/50 with no model change. On real recordings it never trained on, the fine-tuned MolmoAct2 was off by 4.30° per joint on average, against 15.24° for the untuned model and 6.68° for an arm that simply holds still.',
     tags: [
       'MuJoCo',
       'LeRobot',
@@ -19,6 +19,8 @@ export const PROJECTS: Project[] = [
       'AMD ROCm',
       'Domain randomisation',
       'Synthetic data generation',
+      'Real-robot data',
+      'Digital twin',
     ],
     // Lead media is the 14 s pipeline reel (human clip -> cube path -> sim demo -> trained policy).
     // Its panel titles and Simulation badge run close to the frame edges, so the card and the
@@ -45,9 +47,12 @@ export const PROJECTS: Project[] = [
       'Paired exact McNemar tests with Holm correction and Wilson intervals',
       'SmolVLA and ACT train under emulated 6 GB / 8 GB laptop memory caps',
       'A negative result, published: picking the named cube among three failed, mostly through inaction, with no cube moved in about 75% of runs',
+      'Real-data fine-tune: 4.30° average joint error on 50 held-out real episodes, against 15.24° untuned and 6.68° for a still arm (offline, not yet run on the arm)',
+      'Found and fixed a range-clipping bug that pinned wrist roll in 96% of real frames (now 0.18% or less per joint)',
+      'Real rig rebuilt in simulation: the sim arm’s outline matches the real arm at 0.69 overlap (IoU) on held-out frames, up from 0.49',
     ],
     date: 'Oct 2026',
-    role: 'Solo; AI-agent-orchestrated build',
+    role: 'Solo; AI-agent-orchestrated build. Real-arm recordings by a collaborator',
     repoUrl: 'https://github.com/Catnip-harvest/video2sim-so101',
     featured: true,
   },
