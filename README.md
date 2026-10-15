@@ -25,6 +25,7 @@ case-study route at `/project/:id`.
 | Routing | React Router 7 |
 | Animation | Framer Motion |
 | Icons | Lucide |
+| Compare slider | react-compare-slider |
 | Styling | Hand-written CSS in [`index.css`](index.css), no framework |
 | Dev server | Express wrapper in [`server.ts`](server.ts) around Vite middleware |
 | Hosting | Vercel |
@@ -77,6 +78,17 @@ keeps only `public/*-preview.mp4`, so every video the site serves must end in `-
 or it never reaches Vercel. Any `.mp4` that
 appears in a gallery or the lightbox also needs its poster mapped in
 [`lib/media.ts`](lib/media.ts), or the browser is handed the video file as its poster.
+
+A project can set `comparison` to swap its case-study hero for a drag-to-compare slider
+between two videos of the same scene, such as a real camera and its simulation twin. Both
+videos must share frame size, length and frame rate. They play in step with each other, and a
+button pauses them so a viewer can compare a single frame. The slider is
+[`react-compare-slider`](https://github.com/nerdyman/react-compare-slider); why it was chosen,
+and how the two videos are kept in sync, is in
+[`decisions/2026-10-15-video-compare-slider.md`](decisions/2026-10-15-video-compare-slider.md).
+The home-page card still uses `previewVideoUrl`, because the card media is a button that opens
+the lightbox. For the real-to-sim card that video is a pre-rendered wipe loop. The clips for that
+card are built by `portfolio-media/oct13/make_oct13_media.py`, which sits outside this repo.
 
 Cards and the case-study hero crop video to fill the frame (anything from 4:3 on a phone to
 about 1.8:1 on a wide screen), so a 16:9 clip keeps captions inside its central 4:3 band.

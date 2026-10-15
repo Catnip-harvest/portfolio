@@ -1,3 +1,19 @@
+export interface ComparisonVideo {
+  src: string;
+  poster: string;
+  label: string;
+}
+
+/** Two videos of the same scene, shown as a drag-to-compare slider in the case-study hero.
+ *  Both must share frame size, length and frame rate, so they stay aligned while they play. */
+export interface VideoComparison {
+  left: ComparisonVideo;
+  right: ComparisonVideo;
+  /** The videos' own frame shape as a CSS aspect-ratio, e.g. '640 / 448'. */
+  aspectRatio: string;
+  caption: string;
+}
+
 export interface Project {
   id: string;
   type?: 'project' | 'certificate';
@@ -15,6 +31,8 @@ export interface Project {
   videoUrl?: string;
   secondaryImageUrl?: string;
   additionalMedia?: string[];
+  /** Replaces the case-study hero with a drag-to-compare slider. The card still uses previewVideoUrl. */
+  comparison?: VideoComparison;
   features: string[];
   date?: string;
   role?: string;
