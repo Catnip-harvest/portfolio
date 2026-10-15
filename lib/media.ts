@@ -14,6 +14,10 @@ const MEDIA_PREVIEWS: Record<string, string> = {
   '/video2sim-final-trial1-preview.mp4': '/video2sim-final-trial1-poster.webp',
   '/video2sim-final-trial3-preview.mp4': '/video2sim-final-trial3-poster.webp',
   '/video2sim-expert-demo-preview.mp4': '/video2sim-expert-demo-poster.webp',
+  '/rig-twin-wipe-preview.mp4': '/rig-twin-wipe-poster.webp',
+  '/hanoi-expert-preview.mp4': '/hanoi-expert-poster.webp',
+  '/hanoi-act-preview.mp4': '/hanoi-act-poster.webp',
+  '/stack-expert-preview.mp4': '/stack-expert-poster.webp',
 };
 
 export const getMediaPreview = (url: string) => MEDIA_PREVIEWS[url] || url;

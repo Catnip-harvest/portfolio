@@ -5,6 +5,7 @@ import { Project } from '../types';
 import { getMediaPreview, getProjectMedia, isVideoMedia } from '../lib/media';
 import AutoplayVideo from './AutoplayVideo';
 import MediaLightbox, { MediaLightboxState } from './MediaLightbox';
+import VideoCompare from './VideoCompare';
 
 interface ProjectDetailProps {
   project: Project;
@@ -58,7 +59,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
           <p>{project.shortDescription}</p>
         </header>
 
-        {hasHeroMedia && (
+        {project.comparison ? (
+          <figure className="project-detail-compare">
+            <div className="project-detail-compare__stage">
+              <VideoCompare comparison={project.comparison} />
+            </div>
+            <figcaption>{project.comparison.caption}</figcaption>
+          </figure>
+        ) : hasHeroMedia && (
           <button type="button" className="project-detail-hero" onClick={() => openMedia(Math.max(0, heroMediaIndex))} aria-label="Open project media">
             {project.previewVideoUrl ? (
               <AutoplayVideo
