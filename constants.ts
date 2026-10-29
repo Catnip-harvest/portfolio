@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
       'Hierarchical control across embedded controllers, ROS 2 and an Isaac Sim twin, with signal handshaking between the physical line and the virtual model',
       'Photorealistic Omniverse warehouse twin, robot CAD imported via URDF with joint limits, collision meshes and material properties',
       'Modular ROS 2 nodes over the ROS 2 Bridge: LiDAR and RGB-D publishing, velocity command subscription, MoveIt planning experiments',
-      'Full pick mission in simulation (looping on the card at 4x): fetch an empty order bin, drive the aisle, lift the tote off the rack with the gantry, pick the item with the SO-101, return the tote and drop the order onto the conveyor',
+      'Full pick mission simulated in Isaac Sim (looping on the card at 4x): fetch an empty order bin, drive the aisle, lift the tote off the rack with the gantry, pick the item with the SO-101, return the tote and drop the order onto the conveyor',
       'ACT trained, deployed and evaluated for cube picking',
       'MolmoAct2 attempted, streamed from a lab server to the laptop for cube picking, and did not work',
       'smolVLA selectable over the same dataset but not run, since it expects three camera streams and the rig has two',
